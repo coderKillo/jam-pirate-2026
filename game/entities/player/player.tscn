@@ -1,0 +1,140 @@
+[gd_scene load_steps=8 format=3 uid="uid://lubeg5j875jx"]
+
+[ext_resource type="Script" uid="uid://ct0wfkng0uvkm" path="res://game/entities/player/player.gd" id="1_cjfdk"]
+[ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_oic1i"]
+[ext_resource type="Script" uid="uid://s2t4ilq88ay" path="res://game/entities/player/body.gd" id="3_v0nmi"]
+[ext_resource type="PackedScene" uid="uid://biyuiwqw7krg3" path="res://game/entities/player/leg.tscn" id="4_dhej3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iddec"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_iddec"]
+_data = [Vector2(0, 0.449438), 0.0, 10.0924, 0, 0, Vector2(0.154255, 0.966292), 0.0, -0.17603, 0, 0, Vector2(0.547872, 0.966292), 0.603531, 0.603531, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_iddec"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 25, 12, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, -12, 0, 0, 0, 0, -11, -13)
+}
+point_count = 4
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_cjfdk")
+
+[node name="Tail2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.156863, 0.419608, 0, 1)
+position = Vector2(0, -14)
+scale = Vector2(0.784, 2.339)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(625, 189, 13, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+shape = SubResource("CircleShape2D_iddec")
+
+[node name="Body" type="Node2D" parent="." node_paths=PackedStringArray("legs")]
+script = ExtResource("3_v0nmi")
+height = 30.0
+tail_length = 50.0
+head_length = 15.0
+body_segments = 30.0
+legs = [NodePath("Leg"), NodePath("Leg2"), NodePath("Leg3"), NodePath("Leg4")]
+
+[node name="Leg" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
+modulate = Color(0.6, 0.6, 0.6, 1)
+position = Vector2(7.62939e-06, -12)
+anchor = NodePath("../Shoulder")
+
+[node name="Leg3" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
+modulate = Color(0.6, 0.6, 0.6, 1)
+position = Vector2(4.54747e-13, 11)
+anchor = NodePath("../Hip")
+
+[node name="Line2D" type="Line2D" parent="Body"]
+width_curve = SubResource("Curve_iddec")
+
+[node name="Tail" type="Sprite2D" parent="Body"]
+visible = false
+position = Vector2(25, 12)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(625, 189, 13, 13)
+
+[node name="TailGroundAnchor" type="Sprite2D" parent="Body"]
+visible = false
+modulate = Color(0, 1, 1, 1)
+position = Vector2(25, 12)
+scale = Vector2(0.269231, 0.269231)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(625, 189, 13, 13)
+
+[node name="Head" type="Sprite2D" parent="Body"]
+position = Vector2(-11, -13)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(533, 217, 13, 10)
+
+[node name="Head2" type="Sprite2D" parent="Body/Head"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-4.16667, -1.66667)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(438, 116, 19, 19)
+
+[node name="Head3" type="Sprite2D" parent="Body/Head"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(4.16667, -1.66667)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(438, 116, 19, 19)
+
+[node name="Leg2" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
+modulate = Color(0.8, 0.8, 0.8, 1)
+position = Vector2(7.62939e-06, -12)
+anchor = NodePath("../Shoulder")
+
+[node name="Leg4" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
+modulate = Color(0.8, 0.8, 0.8, 1)
+position = Vector2(4.54747e-13, 11)
+anchor = NodePath("../Hip")
+
+[node name="Shoulder" type="Node2D" parent="Body"]
+position = Vector2(7.62939e-06, -12)
+
+[node name="Anchor" type="Sprite2D" parent="Body/Shoulder"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-40.8571, -3.71428)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(625, 189, 13, 13)
+
+[node name="Hip" type="Node2D" parent="Body"]
+position = Vector2(4.54747e-13, 11)
+
+[node name="Anchor" type="Sprite2D" parent="Body/Hip"]
+visible = false
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-40.8571, -89.1428)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_oic1i")
+region_enabled = true
+region_rect = Rect2(625, 189, 13, 13)
+
+[node name="Path2D" type="Path2D" parent="Body"]
+curve = SubResource("Curve2D_iddec")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Body/Path2D"]
+position = Vector2(25, 12)
+rotation = -3.10161
+
+[node name="LegStepTimer" type="Timer" parent="Body"]
+wait_time = 0.05
