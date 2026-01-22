@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var speed = 300.0
 @export var jump_speed = -400.0
 
+@onready var body: Body = $Body
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var _speed := 0.0

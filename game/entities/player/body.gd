@@ -1,3 +1,4 @@
+class_name Body
 extends Node2D
 
 @export var height := 20.0

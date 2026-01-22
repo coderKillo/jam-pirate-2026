@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=13 format=4 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="Shader" uid="uid://xkx8ybjqpbpx" path="res://game/shader/rain.gdshader" id="2_ma400"]
@@ -6,15 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://lubeg5j875jx" path="res://game/entities/player/player.tscn" id="3_dn4rf"]
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="4_dn4rf"]
 [ext_resource type="Texture2D" uid="uid://brhocfjasoamm" path="res://icon.svg" id="5_dn4rf"]
+[ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6icyu"]
 shader = ExtResource("2_ma400")
-shader_parameter/count = 150
+shader_parameter/count = 35
 shader_parameter/slant = 0.1
 shader_parameter/speed = 50.0
 shader_parameter/blur = 0.002
 shader_parameter/colour = Color(1, 1, 1, 1)
-shader_parameter/size = Vector2(0.01, 0.2)
+shader_parameter/size = Vector2(0.02, 0.2)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ociif"]
 texture = ExtResource("3_6lyvc")
@@ -934,6 +935,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -3.0
+offset_right = 6.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -984,6 +989,10 @@ size = Vector2i(640, 360)
 
 [node name="VirtualCamera" type="Camera2D" parent="VirtualViewPort"]
 position = Vector2(320, 180)
+
+[node name="VirtualPlayer" type="Node2D" parent="VirtualViewPort" node_paths=PackedStringArray("player")]
+script = ExtResource("7_ociif")
+player = NodePath("../../World/Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
