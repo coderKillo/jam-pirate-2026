@@ -12,7 +12,9 @@ extends Control
 
 
 func _ready():
-	virtual_world.get_parent().remove_child(virtual_world)
+	virtual_world.hide()
+	virtual_world = virtual_world.duplicate()
+	virtual_world.show()
 	virtual_viewport.add_child(virtual_world)
 	virtual_world.position = $World.position
 

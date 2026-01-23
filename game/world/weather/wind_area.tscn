@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7kedi37x0g55"]
+
+[ext_resource type="Script" uid="uid://bdrq1ceg8dc37" path="res://game/world/weather/wind_area.gd" id="1_uchoj"]
+[ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_7rskd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uchoj"]
+size = Vector2(70, 85)
+
+[node name="WindArea" type="Area2D"]
+script = ExtResource("1_uchoj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.199)
+position = Vector2(-0.999996, -1.10527)
+scale = Vector2(4, 4)
+texture = ExtResource("2_7rskd")
+region_enabled = true
+region_rect = Rect2(668, 437, 19, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1.5)
+shape = SubResource("RectangleShape2D_uchoj")

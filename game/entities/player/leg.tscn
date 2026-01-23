@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_2ru1n"]
 
 [sub_resource type="Curve" id="Curve_u8epa"]
-_data = [Vector2(0, 1), 0.0, 1.88474, 0, 0, Vector2(0.51, 0.505618), -1.96629, -1.96629, 0, 0, Vector2(0.995, 0.157303), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 1.88474, 0, 0, Vector2(0.51, 0.505618), -1.96629, -1.96629, 0, 0, Vector2(1, 0.494382), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="Leg" type="Node2D"]
@@ -30,5 +30,5 @@ region_enabled = true
 region_rect = Rect2(625, 189, 13, 13)
 
 [node name="Line2D" type="Line2D" parent="."]
-width = 8.0
+use_parent_material = true
 width_curve = SubResource("Curve_u8epa")

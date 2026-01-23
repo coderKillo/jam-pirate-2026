@@ -20,6 +20,8 @@ point_count = 4
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_cjfdk")
+speed = 400.0
+jump_speed = -500.0
 
 [node name="Tail2" type="Sprite2D" parent="."]
 visible = false
@@ -35,24 +37,29 @@ position = Vector2(0, -9.53674e-07)
 shape = SubResource("CircleShape2D_iddec")
 
 [node name="Body" type="Node2D" parent="." node_paths=PackedStringArray("legs")]
+use_parent_material = true
 script = ExtResource("3_v0nmi")
 height = 30.0
-tail_length = 50.0
+tail_length = 65.0
 head_length = 15.0
-body_segments = 30.0
+body_segments = 20.0
 legs = [NodePath("Leg"), NodePath("Leg2"), NodePath("Leg3"), NodePath("Leg4")]
 
 [node name="Leg" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.6, 0.6, 0.6, 1)
+use_parent_material = true
 position = Vector2(7.62939e-06, -12)
 anchor = NodePath("../Shoulder")
 
 [node name="Leg3" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.6, 0.6, 0.6, 1)
+use_parent_material = true
 position = Vector2(4.54747e-13, 11)
 anchor = NodePath("../Hip")
 
 [node name="Line2D" type="Line2D" parent="Body"]
+use_parent_material = true
+width = 15.0
 width_curve = SubResource("Curve_iddec")
 
 [node name="Tail" type="Sprite2D" parent="Body"]
@@ -73,14 +80,16 @@ region_enabled = true
 region_rect = Rect2(625, 189, 13, 13)
 
 [node name="Head" type="Sprite2D" parent="Body"]
+use_parent_material = true
 position = Vector2(-11, -13)
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_oic1i")
 region_enabled = true
 region_rect = Rect2(533, 217, 13, 10)
 
 [node name="Head2" type="Sprite2D" parent="Body/Head"]
 modulate = Color(0, 0, 0, 1)
+use_parent_material = true
 position = Vector2(-4.16667, -1.66667)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_oic1i")
@@ -89,6 +98,7 @@ region_rect = Rect2(438, 116, 19, 19)
 
 [node name="Head3" type="Sprite2D" parent="Body/Head"]
 modulate = Color(0, 0, 0, 1)
+use_parent_material = true
 position = Vector2(4.16667, -1.66667)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_oic1i")
@@ -97,11 +107,13 @@ region_rect = Rect2(438, 116, 19, 19)
 
 [node name="Leg2" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.8, 0.8, 0.8, 1)
+use_parent_material = true
 position = Vector2(7.62939e-06, -12)
 anchor = NodePath("../Shoulder")
 
 [node name="Leg4" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.8, 0.8, 0.8, 1)
+use_parent_material = true
 position = Vector2(4.54747e-13, 11)
 anchor = NodePath("../Hip")
 
