@@ -5,7 +5,7 @@ extends Control
 @export var gui: Control
 
 @onready var window_display: Node2D = $WindowCanvesLayer/WindowDisplay
-@onready var virtual_viewport: SubViewport = $VirtualViewPort
+@onready var virtual_world_container: Node2D = $VirtualViewPort/Container
 @onready var real_world: Node2D = $World/RealWorld
 @onready var virtual_world: Node2D = $World/VirtualWorld
 @onready var real_player: Node2D = $World/VirtualWorld
@@ -15,7 +15,7 @@ func _ready():
 	virtual_world.hide()
 	virtual_world = virtual_world.duplicate()
 	virtual_world.show()
-	virtual_viewport.add_child(virtual_world)
+	virtual_world_container.add_child(virtual_world)
 	virtual_world.position = $World.position
 
 	if not SceneManager.main:

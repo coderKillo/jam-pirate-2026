@@ -1,23 +1,16 @@
-[gd_scene load_steps=16 format=4 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=18 format=4 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
+[ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
 [ext_resource type="Shader" uid="uid://xkx8ybjqpbpx" path="res://game/shader/rain.gdshader" id="2_ugwa6"]
 [ext_resource type="Texture2D" uid="uid://d1pmk21n4cfey" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap_packed.png" id="3_6lyvc"]
 [ext_resource type="PackedScene" uid="uid://lubeg5j875jx" path="res://game/entities/player/player.tscn" id="3_dn4rf"]
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="4_dn4rf"]
+[ext_resource type="PackedScene" uid="uid://bk2fjx4jvt4jc" path="res://game/world/background/background_virtual.tscn" id="5_bicih"]
 [ext_resource type="Texture2D" uid="uid://brhocfjasoamm" path="res://icon.svg" id="5_dn4rf"]
 [ext_resource type="PackedScene" uid="uid://c7kedi37x0g55" path="res://game/world/weather/wind_area.tscn" id="5_ugwa6"]
 [ext_resource type="Script" uid="uid://bsbyrdhdjck38" path="res://game/world/window/window_area.gd" id="7_6icyu"]
 [ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6icyu"]
-shader = ExtResource("2_ugwa6")
-shader_parameter/count = 35
-shader_parameter/slant = 0.1
-shader_parameter/speed = 50.0
-shader_parameter/blur = 0.002
-shader_parameter/colour = Color(1, 1, 1, 1)
-shader_parameter/size = Vector2(0.02, 0.2)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ociif"]
 texture = ExtResource("3_6lyvc")
@@ -899,11 +892,20 @@ texture_region_size = Vector2i(21, 21)
 29:29/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ociif"]
-tile_size = Vector2i(21, 21)
+tile_size = Vector2i(21, 32)
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 2
 sources/1 = SubResource("TileSetAtlasSource_ociif")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6icyu"]
+shader = ExtResource("2_ugwa6")
+shader_parameter/count = 35
+shader_parameter/slant = 0.1
+shader_parameter/speed = 50.0
+shader_parameter/blur = 0.002
+shader_parameter/colour = Color(1, 1, 1, 1)
+shader_parameter/size = Vector2(0.02, 0.2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dn4rf"]
 shader = ExtResource("4_dn4rf")
@@ -913,7 +915,7 @@ shader_parameter/sample_offset = Vector2(0, 0)
 viewport_path = NodePath("VirtualViewPort")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ociif"]
-size = Vector2(160, 100)
+size = Vector2(240, 180)
 
 [node name="MainScene" type="Control" node_paths=PackedStringArray("level_container", "gui")]
 layout_mode = 3
@@ -934,6 +936,38 @@ gui = NodePath("CanvasLayer/Gui")
 [node name="StaticCamera" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.564962, 0.564962, 0.564962, 1)
+
+[node name="World" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="BackgroundReal" parent="World" instance=ExtResource("2_3p8nd")]
+position = Vector2(62, -35)
+
+[node name="RealWorld" type="Node2D" parent="World"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/RealWorld"]
+position = Vector2(60, 70)
+scale = Vector2(1.5, 1.5)
+tile_map_data = PackedByteArray("AADq/wcAAQAIAAsAAADr/wcAAQAIAAsAAADs/wcAAQAIAAsAAADt/wcAAQAIAAsAAADu/wcAAQAIAAsAAADv/wcAAQAIAAsAAADw/wcAAQAIAAsAAADx/wcAAQAIAAsAAADy/wcAAQAIAAsAAADz/wcAAQAIAAsAAAD0/wcAAQAIAAsAAAD1/wcAAQAIAAsAAAD2/wcAAQAIAAsAAAD3/wcAAQAIAAsAAAD4/wcAAQAIAAsAAAD5/wcAAQAIAAsAAAD6/wcAAQAIAAsAAAD7/wcAAQAIAAsAAAD8/wcAAQAIAAsAAAD9/wcAAQAIAAsAAAD+/wcAAQAIAAsAAAD//wcAAQAIAAsAAAAAAAcAAQAIAAsAAAABAAcAAQAIAAsAAAACAAcAAQAIAAsAAAADAAcAAQAIAAsAAAAEAAcAAQAIAAsAAAAFAAcAAQAIAAsAAAAGAAcAAQAIAAsAAAAHAAcAAQAIAAsAAAAIAAcAAQAIAAsAAAAJAAcAAQAIAAsAAAAKAAcAAQAIAAsAAAALAAcAAQAIAAsAAAAMAAcAAQAIAAsAAAANAAcAAQAIAAsAAAAOAAcAAQAIAAsAAAAPAAcAAQAIAAsAAAAQAAcAAQAIAAsAAAARAAcAAQAIAAsAAAD+/wMAAQAIAAsAAAD//wMAAQAIAAsAAAAAAAMAAQAIAAsAAAABAAMAAQAIAAsAAAACAAMAAQAIAAsAAAADAAMAAQAIAAsAAAAEAAMAAQAIAAsAAAAFAAMAAQAIAAsAAAAGAAMAAQAIAAsAAAAHAAMAAQAIAAsAAAAIAAMAAQAIAAsAAAAJAAMAAQAIAAsAAAAKAAMAAQAIAAsAAAALAAMAAQAIAAsAAADw////AQAIAAsAAADx////AQAIAAsAAADy////AQAIAAsAAADz////AQAIAAsAAAD0////AQAIAAsAAAD1////AQAIAAsAAAD2////AQAIAAsAAAD3////AQAIAAsAAAD4////AQAIAAsAAAD5////AQAIAAsAAAD6////AQAIAAsAAADv/wMAAQAIAAsAAADw/wMAAQAIAAsAAADx/wMAAQAIAAsAAADy/wMAAQAIAAsAAADz/wMAAQAIAAsAAAD0/wMAAQAIAAsAAAD1/wMAAQAIAAsAAAD2/wMAAQAIAAsAAAD3/wMAAQAIAAsAAAD4/wMAAQAIAAsAAAD7//7/AQAIAAsAAAD8//7/AQAIAAsAAAD9//7/AQAIAAsAAAD///7/AQAIAAsAAAAAAP7/AQAIAAsAAAABAP7/AQAIAAsAAAACAP7/AQAIAAsAAAADAP7/AQAIAAsAAAAEAP7/AQAIAAsAAAD+//7/AQAIAAsAAAAIAAAAAQAIAAsAAAAJAAAAAQAIAAsAAAAKAAAAAQAIAAsAAAALAAAAAQAIAAsAAAAMAAAAAQAIAAsAAADy//v/AQAIAAsAAADz//v/AQAIAAsAAAD0//v/AQAIAAsAAAD1//v/AQAIAAsAAAD2//v/AQAIAAsAAAD3//v/AQAIAAsAAAD4//v/AQAIAAsAAADr//z/AQAIAAsAAADs//z/AQAIAAsAAADt//z/AQAIAAsAAADu//z/AQAIAAsAAAD+//n/AQAIAAsAAAD///n/AQAIAAsAAAAAAPn/AQAIAAsAAAABAPn/AQAIAAsAAAA=")
+tile_set = SubResource("TileSet_ociif")
+
+[node name="WindArea" parent="World" instance=ExtResource("5_ugwa6")]
+position = Vector2(-99, -71)
+wind_power = 4235
+
+[node name="VirtualWorld" type="Node2D" parent="World"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/VirtualWorld"]
+position = Vector2(60, 70)
+scale = Vector2(1.5, 1.5)
+tile_map_data = PackedByteArray("AADq/wcAAQAIAAUAAADr/wcAAQAIAAUAAADs/wcAAQAIAAUAAADt/wcAAQAIAAUAAADu/wcAAQAIAAUAAADv/wcAAQAIAAUAAADw/wcAAQAIAAUAAADx/wcAAQAIAAUAAADy/wcAAQAIAAUAAADz/wcAAQAIAAUAAAD0/wcAAQAIAAUAAAD1/wcAAQAIAAUAAAD2/wcAAQAIAAUAAAD3/wcAAQAIAAUAAAD4/wcAAQAIAAUAAAD5/wcAAQAIAAUAAAD6/wcAAQAIAAUAAAD7/wcAAQAIAAUAAAD8/wcAAQAIAAUAAAD9/wcAAQAIAAUAAAD+/wcAAQAIAAUAAAD//wcAAQAIAAUAAAAAAAcAAQAIAAUAAAABAAcAAQAIAAUAAAACAAcAAQAIAAUAAAADAAcAAQAIAAUAAAAEAAcAAQAIAAUAAAAFAAcAAQAIAAUAAAAGAAcAAQAIAAUAAAAHAAcAAQAIAAUAAAAIAAcAAQAIAAUAAAAJAAcAAQAIAAUAAAAKAAcAAQAIAAUAAAALAAcAAQAIAAUAAAAMAAcAAQAIAAUAAAANAAcAAQAIAAUAAAAOAAcAAQAIAAUAAAAPAAcAAQAIAAUAAAAQAAcAAQAIAAUAAAARAAcAAQAIAAUAAADr//z/AQAIAAUAAADs//z/AQAIAAUAAADt//z/AQAIAAUAAADu//z/AQAIAAUAAADy//v/AQAIAAUAAADz//v/AQAIAAUAAAD0//v/AQAIAAUAAAD1//v/AQAIAAUAAAD2//v/AQAIAAUAAAD3//v/AQAIAAUAAAD4//v/AQAIAAUAAAD+//n/AQAIAAUAAAD///n/AQAIAAUAAAAAAPn/AQAIAAUAAAABAPn/AQAIAAUAAAABAP7/AQAIAAUAAAACAP7/AQAIAAUAAAADAP7/AQAIAAUAAAAEAP7/AQAIAAUAAAAIAAAAAQAIAAUAAAAJAAAAAQAIAAUAAAAKAAAAAQAIAAUAAAALAAAAAQAIAAUAAAAMAAAAAQAIAAUAAADw////AQAIAAUAAADx////AQAIAAUAAADy////AQAIAAUAAADz////AQAIAAUAAAD0////AQAIAAUAAAD1////AQAIAAUAAAD2////AQAIAAUAAAD3////AQAIAAUAAAD4////AQAIAAUAAAD5////AQAIAAUAAAD6////AQAIAAUAAADv/wMAAQAIAAUAAADw/wMAAQAIAAUAAADx/wMAAQAIAAUAAADy/wMAAQAIAAUAAADz/wMAAQAIAAUAAAD0/wMAAQAIAAUAAAD1/wMAAQAIAAUAAAD2/wMAAQAIAAUAAAD3/wMAAQAIAAUAAAD4/wMAAQAIAAUAAAD+/wMAAQAIAAUAAAD//wMAAQAIAAUAAAAAAAMAAQAIAAUAAAABAAMAAQAIAAUAAAACAAMAAQAIAAUAAAAIAAMAAQAIAAUAAAAJAAMAAQAIAAUAAAAKAAMAAQAIAAUAAAALAAMAAQAIAAUAAAA=")
+tile_set = SubResource("TileSet_ociif")
+
+[node name="Player" parent="World" instance=ExtResource("3_dn4rf")]
+collision_layer = 17
+
 [node name="RainEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6icyu")
 layout_mode = 1
@@ -950,35 +984,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0.12, 0.12, 1)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.564962, 0.564962, 0.564962, 1)
-
-[node name="World" type="Node2D" parent="."]
-position = Vector2(640, 360)
-
-[node name="RealWorld" type="Node2D" parent="World"]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="World/RealWorld"]
-position = Vector2(60, 70)
-scale = Vector2(1.5, 1.5)
-tile_map_data = PackedByteArray("AADq/wcAAQAIAAsAAADr/wcAAQAIAAsAAADs/wcAAQAIAAsAAADt/wcAAQAIAAsAAADu/wcAAQAIAAsAAADv/wcAAQAIAAsAAADw/wcAAQAIAAsAAADx/wcAAQAIAAsAAADy/wcAAQAIAAsAAADz/wcAAQAIAAsAAAD0/wcAAQAIAAsAAAD1/wcAAQAIAAsAAAD2/wcAAQAIAAsAAAD3/wcAAQAIAAsAAAD4/wcAAQAIAAsAAAD5/wcAAQAIAAsAAAD6/wcAAQAIAAsAAAD7/wcAAQAIAAsAAAD8/wcAAQAIAAsAAAD9/wcAAQAIAAsAAAD+/wcAAQAIAAsAAAD//wcAAQAIAAsAAAAAAAcAAQAIAAsAAAABAAcAAQAIAAsAAAACAAcAAQAIAAsAAAADAAcAAQAIAAsAAAAEAAcAAQAIAAsAAAAFAAcAAQAIAAsAAAAGAAcAAQAIAAsAAAAHAAcAAQAIAAsAAAAIAAcAAQAIAAsAAAAJAAcAAQAIAAsAAAAKAAcAAQAIAAsAAAALAAcAAQAIAAsAAAAMAAcAAQAIAAsAAAANAAcAAQAIAAsAAAAOAAcAAQAIAAsAAAAPAAcAAQAIAAsAAAAQAAcAAQAIAAsAAAARAAcAAQAIAAsAAAD+/wMAAQAIAAsAAAD//wMAAQAIAAsAAAAAAAMAAQAIAAsAAAABAAMAAQAIAAsAAAACAAMAAQAIAAsAAAADAAMAAQAIAAsAAAAEAAMAAQAIAAsAAAAFAAMAAQAIAAsAAAAGAAMAAQAIAAsAAAAHAAMAAQAIAAsAAAAIAAMAAQAIAAsAAAAJAAMAAQAIAAsAAAAKAAMAAQAIAAsAAAALAAMAAQAIAAsAAADw////AQAIAAsAAADx////AQAIAAsAAADy////AQAIAAsAAADz////AQAIAAsAAAD0////AQAIAAsAAAD1////AQAIAAsAAAD2////AQAIAAsAAAD3////AQAIAAsAAAD4////AQAIAAsAAAD5////AQAIAAsAAAD6////AQAIAAsAAADv/wMAAQAIAAsAAADw/wMAAQAIAAsAAADx/wMAAQAIAAsAAADy/wMAAQAIAAsAAADz/wMAAQAIAAsAAAD0/wMAAQAIAAsAAAD1/wMAAQAIAAsAAAD2/wMAAQAIAAsAAAD3/wMAAQAIAAsAAAD4/wMAAQAIAAsAAAD7//7/AQAIAAsAAAD8//7/AQAIAAsAAAD9//7/AQAIAAsAAAD///7/AQAIAAsAAAAAAP7/AQAIAAsAAAABAP7/AQAIAAsAAAACAP7/AQAIAAsAAAADAP7/AQAIAAsAAAAEAP7/AQAIAAsAAAD+//7/AQAIAAsAAAAIAAAAAQAIAAsAAAAJAAAAAQAIAAsAAAAKAAAAAQAIAAsAAAALAAAAAQAIAAsAAAAMAAAAAQAIAAsAAADy//v/AQAIAAsAAADz//v/AQAIAAsAAAD0//v/AQAIAAsAAAD1//v/AQAIAAsAAAD2//v/AQAIAAsAAAD3//v/AQAIAAsAAAD4//v/AQAIAAsAAADr//z/AQAIAAsAAADs//z/AQAIAAsAAADt//z/AQAIAAsAAADu//z/AQAIAAsAAAD+//n/AQAIAAsAAAD///n/AQAIAAsAAAAAAPn/AQAIAAsAAAABAPn/AQAIAAsAAAA=")
-tile_set = SubResource("TileSet_ociif")
-
-[node name="WindArea" parent="World" instance=ExtResource("5_ugwa6")]
-position = Vector2(-99, -71)
-wind_power = 4235
-
-[node name="VirtualWorld" type="Node2D" parent="World"]
-
-[node name="TileMapLayer2" type="TileMapLayer" parent="World/VirtualWorld"]
-position = Vector2(60, 70)
-scale = Vector2(1.5, 1.5)
-tile_map_data = PackedByteArray("AADq/wcAAQAIAAUAAADr/wcAAQAIAAUAAADs/wcAAQAIAAUAAADt/wcAAQAIAAUAAADu/wcAAQAIAAUAAADv/wcAAQAIAAUAAADw/wcAAQAIAAUAAADx/wcAAQAIAAUAAADy/wcAAQAIAAUAAADz/wcAAQAIAAUAAAD0/wcAAQAIAAUAAAD1/wcAAQAIAAUAAAD2/wcAAQAIAAUAAAD3/wcAAQAIAAUAAAD4/wcAAQAIAAUAAAD5/wcAAQAIAAUAAAD6/wcAAQAIAAUAAAD7/wcAAQAIAAUAAAD8/wcAAQAIAAUAAAD9/wcAAQAIAAUAAAD+/wcAAQAIAAUAAAD//wcAAQAIAAUAAAAAAAcAAQAIAAUAAAABAAcAAQAIAAUAAAACAAcAAQAIAAUAAAADAAcAAQAIAAUAAAAEAAcAAQAIAAUAAAAFAAcAAQAIAAUAAAAGAAcAAQAIAAUAAAAHAAcAAQAIAAUAAAAIAAcAAQAIAAUAAAAJAAcAAQAIAAUAAAAKAAcAAQAIAAUAAAALAAcAAQAIAAUAAAAMAAcAAQAIAAUAAAANAAcAAQAIAAUAAAAOAAcAAQAIAAUAAAAPAAcAAQAIAAUAAAAQAAcAAQAIAAUAAAARAAcAAQAIAAUAAADr//z/AQAIAAUAAADs//z/AQAIAAUAAADt//z/AQAIAAUAAADu//z/AQAIAAUAAADy//v/AQAIAAUAAADz//v/AQAIAAUAAAD0//v/AQAIAAUAAAD1//v/AQAIAAUAAAD2//v/AQAIAAUAAAD3//v/AQAIAAUAAAD4//v/AQAIAAUAAAD+//n/AQAIAAUAAAD///n/AQAIAAUAAAAAAPn/AQAIAAUAAAABAPn/AQAIAAUAAAABAP7/AQAIAAUAAAACAP7/AQAIAAUAAAADAP7/AQAIAAUAAAAEAP7/AQAIAAUAAAAIAAAAAQAIAAUAAAAJAAAAAQAIAAUAAAAKAAAAAQAIAAUAAAALAAAAAQAIAAUAAAAMAAAAAQAIAAUAAADw////AQAIAAUAAADx////AQAIAAUAAADy////AQAIAAUAAADz////AQAIAAUAAAD0////AQAIAAUAAAD1////AQAIAAUAAAD2////AQAIAAUAAAD3////AQAIAAUAAAD4////AQAIAAUAAAD5////AQAIAAUAAAD6////AQAIAAUAAADv/wMAAQAIAAUAAADw/wMAAQAIAAUAAADx/wMAAQAIAAUAAADy/wMAAQAIAAUAAADz/wMAAQAIAAUAAAD0/wMAAQAIAAUAAAD1/wMAAQAIAAUAAAD2/wMAAQAIAAUAAAD3/wMAAQAIAAUAAAD4/wMAAQAIAAUAAAD+/wMAAQAIAAUAAAD//wMAAQAIAAUAAAAAAAMAAQAIAAUAAAABAAMAAQAIAAUAAAACAAMAAQAIAAUAAAAIAAMAAQAIAAUAAAAJAAMAAQAIAAUAAAAKAAMAAQAIAAUAAAALAAMAAQAIAAUAAAA=")
-tile_set = SubResource("TileSet_ociif")
-
-[node name="Player" parent="World" instance=ExtResource("3_dn4rf")]
-collision_layer = 17
-
 [node name="WindowCanvesLayer" type="CanvasLayer" parent="."]
 
 [node name="WindowDisplay" type="Node2D" parent="WindowCanvesLayer"]
@@ -986,17 +991,17 @@ position = Vector2(348, 407)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="WindowCanvesLayer/WindowDisplay"]
 position = Vector2(-482, -135)
-color = Color(1.5, 1.2, 1, 1)
+color = Color(1.3, 1.1, 1, 1)
 
 [node name="WindowBG" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
-scale = Vector2(1.335, 0.865)
+scale = Vector2(2.025, 1.516)
 texture = ExtResource("5_dn4rf")
 
 [node name="ViewportTexture" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
 material = SubResource("ShaderMaterial_dn4rf")
 texture = SubResource("ViewportTexture_qe2dj")
 region_enabled = true
-region_rect = Rect2(240, 130, 160, 100)
+region_rect = Rect2(0, 0, 240, 180)
 
 [node name="WindowArea" type="Area2D" parent="WindowCanvesLayer/WindowDisplay"]
 collision_layer = 0
@@ -1008,6 +1013,11 @@ shape = SubResource("RectangleShape2D_ociif")
 
 [node name="VirtualViewPort" type="SubViewport" parent="."]
 size = Vector2i(1280, 720)
+
+[node name="BackgroundVirtual" parent="VirtualViewPort" instance=ExtResource("5_bicih")]
+position = Vector2(648, 363)
+
+[node name="Container" type="Node2D" parent="VirtualViewPort"]
 
 [node name="VirtualCamera" type="Camera2D" parent="VirtualViewPort"]
 position = Vector2(640, 360)
