@@ -17,6 +17,7 @@ func _ready():
 	Events.level_setup.connect(_on_setup_level)
 	Events.level_won.connect(_on_level_won)
 	Events.tv_collected.connect(_on_tv_collected)
+	Events.player_died.connect(_on_player_died)
 
 
 func _on_setup_level():
@@ -64,3 +65,7 @@ func _on_level_won():
 func _on_tv_collected():
 	window_display.global_position = SceneManager.current_level.tv.global_position
 	window_display._enable = true
+
+
+func _on_player_died():
+	Events.level_lose.emit()

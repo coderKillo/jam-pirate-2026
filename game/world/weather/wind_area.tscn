@@ -1,22 +1,110 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7kedi37x0g55"]
+[gd_scene load_steps=17 format=3 uid="uid://c7kedi37x0g55"]
 
 [ext_resource type="Script" uid="uid://bdrq1ceg8dc37" path="res://game/world/weather/wind_area.gd" id="1_uchoj"]
-[ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_7rskd"]
+[ext_resource type="Texture2D" uid="uid://kjnc4j6tx55x" path="res://assets/selfmade/wind-sheet.png" id="2_uchoj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uchoj"]
-size = Vector2(70, 85)
+size = Vector2(67, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uchoj"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rskd"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj4jj"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itlsh"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i7qm"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqe88"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tov4r"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la5c6"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xobs"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3jsp"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_havie"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfwa6"]
+atlas = ExtResource("2_uchoj")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_la5c6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uchoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rskd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj4jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itlsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i7qm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqe88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tov4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la5c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xobs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3jsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_havie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfwa6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="WindArea" type="Area2D"]
 script = ExtResource("1_uchoj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.199)
-position = Vector2(-0.999996, -1.10527)
-scale = Vector2(4, 4)
-texture = ExtResource("2_7rskd")
-region_enabled = true
-region_rect = Rect2(668, 437, 19, 21)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, -1.5)
+position = Vector2(1.5, -1)
 shape = SubResource("RectangleShape2D_uchoj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_la5c6")
+frame_progress = 0.894855

@@ -1,14 +1,25 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=18 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
 [ext_resource type="Shader" uid="uid://xkx8ybjqpbpx" path="res://game/shader/rain.gdshader" id="2_ugwa6"]
+[ext_resource type="Script" uid="uid://dctg78ljek1r4" path="res://game/world/death_zone.gd" id="3_x0q8c"]
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="4_dn4rf"]
 [ext_resource type="Script" uid="uid://cx71xp8b2igrn" path="res://game/world/window/window_display.gd" id="4_ugwa6"]
 [ext_resource type="PackedScene" uid="uid://bk2fjx4jvt4jc" path="res://game/world/background/background_virtual.tscn" id="5_bicih"]
 [ext_resource type="Texture2D" uid="uid://brhocfjasoamm" path="res://icon.svg" id="5_dn4rf"]
 [ext_resource type="Script" uid="uid://bsbyrdhdjck38" path="res://game/world/window/window_area.gd" id="7_6icyu"]
 [ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ugwa6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_x0q8c"]
+normal = Vector2(1, 0)
+distance = -661.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3p8nd"]
+normal = Vector2(-1, 0)
+distance = -660.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6icyu"]
 shader = ExtResource("2_ugwa6")
@@ -53,6 +64,21 @@ position = Vector2(640, 360)
 
 [node name="BackgroundReal" parent="World" instance=ExtResource("2_3p8nd")]
 position = Vector2(62, -35)
+
+[node name="DeathZone" type="Area2D" parent="World"]
+script = ExtResource("3_x0q8c")
+
+[node name="Down" type="CollisionShape2D" parent="World/DeathZone"]
+position = Vector2(0, 486)
+shape = SubResource("WorldBoundaryShape2D_ugwa6")
+
+[node name="Left" type="CollisionShape2D" parent="World/DeathZone"]
+position = Vector2(-96, 411)
+shape = SubResource("WorldBoundaryShape2D_x0q8c")
+
+[node name="Right" type="CollisionShape2D" parent="World/DeathZone"]
+position = Vector2(94, 413)
+shape = SubResource("WorldBoundaryShape2D_3p8nd")
 
 [node name="RainEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6icyu")

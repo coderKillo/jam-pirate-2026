@@ -911,4 +911,5 @@ position = Vector2(294, 84)
 shape = SubResource("RectangleShape2D_i7u8v")
 
 [node name="Player" parent="." instance=ExtResource("2_ums2j")]
+modulate = Color(0.303967, 0.44, 0.2068, 1)
 position = Vector2(7, 98)
