@@ -13,7 +13,7 @@ config_version=5
 config/name="Just A Different Worldview"
 config/description="s"
 config/version="0.0.1"
-run/main_scene="uid://b6pacd4qux0r0"
+run/main_scene="uid://cmmq3qk054d8m"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

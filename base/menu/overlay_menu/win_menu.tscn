@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://by632jqo48fbs"]
+[gd_scene load_steps=4 format=3 uid="uid://by632jqo48fbs"]
 
+[ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_nxcle"]
 [ext_resource type="Script" uid="uid://bui4ncqhtuy1p" path="res://base/menu/overlay_menu/win_menu.gd" id="1_to7dx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxcle"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="WinMenu" type="Control"]
 process_mode = 3
@@ -10,9 +14,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_nxcle")
 script = ExtResource("1_to7dx")
+pauses_game = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,16 +29,16 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.117647)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 2
-offset_left = 320.0
-offset_top = 180.0
-offset_right = 320.0
-offset_bottom = 180.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nxcle")
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
