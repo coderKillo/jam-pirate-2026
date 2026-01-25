@@ -28,6 +28,7 @@ func load_game_scene():
 
 
 func load_main_menu():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().change_scene_to_packed(scene_resource.main_menu)
 	main = null
 
@@ -61,6 +62,7 @@ func load_level(level: int):
 
 	current_level = scene_resource.levels[level].instantiate()
 
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if is_instance_valid(main.level_container):
 		main.level_container.call_deferred("add_child", current_level)
 	else:
@@ -71,6 +73,7 @@ func _on_game_won():
 	if not is_instance_valid(main):
 		return
 
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.win_menu.instantiate()
 	main.gui.add_child(scene)
 
@@ -79,6 +82,7 @@ func _on_game_lose():
 	if not is_instance_valid(main):
 		return
 
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.lose_menu.instantiate()
 	main.gui.add_child(scene)
 
@@ -87,5 +91,6 @@ func _pause_game():
 	if not is_instance_valid(main):
 		return
 
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.pause_menu.instantiate()
 	main.gui.add_child(scene)

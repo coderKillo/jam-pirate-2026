@@ -6,14 +6,7 @@ extends Node2D
 var _enable := false
 
 
-func _ready():
-	Events.enable_view.connect(_on_enable_view)
-
-
-func _process(_delta):
+func _input(event):
 	if _enable:
-		global_position = get_global_mouse_position()
-
-
-func _on_enable_view(enable: bool):
-	_enable = enable
+		if event is InputEventMouseMotion:
+			global_position += event.relative

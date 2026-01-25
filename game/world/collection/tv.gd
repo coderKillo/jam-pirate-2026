@@ -10,5 +10,5 @@ func _ready():
 func _on_body_connect(body):
 	if not body is Player:
 		return
-	Events.enable_view.emit(true)
+	Events.tv_collected.emit()
 	queue_free()

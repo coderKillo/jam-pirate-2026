@@ -16,6 +16,7 @@ var _tween: Tween
 func _ready():
 	Events.level_setup.connect(_on_setup_level)
 	Events.level_won.connect(_on_level_won)
+	Events.tv_collected.connect(_on_tv_collected)
 
 
 func _on_setup_level():
@@ -58,3 +59,8 @@ func _on_level_won():
 		. set_trans(Tween.TRANS_ELASTIC)
 		. set_ease(Tween.EASE_OUT)
 	)
+
+
+func _on_tv_collected():
+	window_display.global_position = SceneManager.current_level.tv.global_position
+	window_display._enable = true

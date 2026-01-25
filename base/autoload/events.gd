@@ -7,3 +7,5 @@ signal level_lose
 signal level_setup
 
 signal enable_view(enable: bool)
+
+signal tv_collected
