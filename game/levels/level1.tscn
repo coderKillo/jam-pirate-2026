@@ -908,7 +908,7 @@ tile_map_data = PackedByteArray("AADq/wcAAQAIAAsAAADr/wcAAQAIAAsAAADs/wcAAQAIAAs
 tile_set = SubResource("TileSet_01suh")
 
 [node name="TV" parent="RealWorld" instance=ExtResource("3_blj8w")]
-position = Vector2(369, 135)
+position = Vector2(371, 125)
 script = ExtResource("4_01suh")
 
 [node name="VirtualWorld" type="Node2D" parent="."]

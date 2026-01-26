@@ -1,19 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://cot42wx71kkw4"]
 
-[ext_resource type="Texture2D" uid="uid://d1pmk21n4cfey" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap_packed.png" id="1_cwrc8"]
+[ext_resource type="Texture2D" uid="uid://fjwvvrbb0hxl" path="res://assets/selfmade/tv.png" id="1_cwrc8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psvgy"]
-size = Vector2(32, 32)
+size = Vector2(46, 43)
 
 [node name="TV" type="Node2D"]
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_psvgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_cwrc8")
-region_enabled = true
 region_rect = Rect2(210, 189, 21, 21)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_psvgy")
