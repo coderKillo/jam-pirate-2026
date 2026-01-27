@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://7eh1kmaickso"]
+[gd_scene load_steps=11 format=4 uid="uid://7eh1kmaickso"]
 
 [ext_resource type="Script" uid="uid://gi24plob2g5t" path="res://game/levels/level.gd" id="1_ic1hw"]
 [ext_resource type="Texture2D" uid="uid://d1pmk21n4cfey" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap_packed.png" id="2_psvgy"]
 [ext_resource type="PackedScene" uid="uid://lubeg5j875jx" path="res://game/entities/player/player.tscn" id="3_3y0nw"]
 [ext_resource type="PackedScene" uid="uid://cot42wx71kkw4" path="res://game/world/collection/tv.tscn" id="3_blj8w"]
 [ext_resource type="Script" uid="uid://102jmchb42w2" path="res://game/world/collection/tv.gd" id="4_01suh"]
+[ext_resource type="PackedScene" uid="uid://dyotv1uwjptxl" path="res://game/world/objects/Spring.tscn" id="5_e7nd3"]
 [ext_resource type="PackedScene" uid="uid://b2s7ptu8nju1" path="res://game/world/collection/couch.tscn" id="5_ofauc"]
 [ext_resource type="Script" uid="uid://c5a0hu10kbqq7" path="res://game/world/collection/couch.gd" id="6_e7nd3"]
 
@@ -911,6 +912,14 @@ tile_set = SubResource("TileSet_01suh")
 position = Vector2(371, 125)
 script = ExtResource("4_01suh")
 
+[node name="Spring" parent="RealWorld" instance=ExtResource("5_e7nd3")]
+position = Vector2(233, 133)
+lock_rotation = true
+
+[node name="Spring2" parent="RealWorld" instance=ExtResource("5_e7nd3")]
+position = Vector2(279, 133)
+lock_rotation = true
+
 [node name="VirtualWorld" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="VirtualWorld"]
@@ -924,4 +933,3 @@ position = Vector2(117, 135)
 script = ExtResource("6_e7nd3")
 
 [node name="Player" parent="." instance=ExtResource("3_3y0nw")]
-collision_layer = 17

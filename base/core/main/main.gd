@@ -37,6 +37,8 @@ func _on_setup_level():
 
 	virtual_player.set_player(SceneManager.current_level.player)
 
+	_copy_real_world_to_virtual_world()
+
 	window_display._enable = false
 	window_display.global_position = window_display.disable_position
 
@@ -69,3 +71,10 @@ func _on_tv_collected():
 
 func _on_player_died():
 	Events.level_lose.emit()
+
+
+func _copy_real_world_to_virtual_world():
+	for spring in get_tree().get_nodes_in_group("spring"):
+		var virtual_spring = spring.make_copy()
+		_virtual_world.add_child(virtual_spring)
+		virtual_spring.position = spring.position

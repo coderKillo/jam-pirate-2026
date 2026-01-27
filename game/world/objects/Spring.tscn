@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyotv1uwjptxl"]
+
+[ext_resource type="Script" uid="uid://bxgskbigutn8s" path="res://game/world/objects/spring.gd" id="1_1fwbs"]
+[ext_resource type="Texture2D" uid="uid://bxnfignt4xwg8" path="res://assets/selfmade/spring.png" id="1_31i82"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1fwbs"]
+radius = 13.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f27a"]
+atlas = ExtResource("1_31i82")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aegud"]
+atlas = ExtResource("1_31i82")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x5is"]
+atlas = ExtResource("1_31i82")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ago6c"]
+atlas = ExtResource("1_31i82")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c64s2"]
+atlas = ExtResource("1_31i82")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu52t"]
+atlas = ExtResource("1_31i82")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y1ylc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f27a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aegud")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x5is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ago6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c64s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu52t")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}]
+
+[node name="Spring" type="RigidBody2D" groups=["moveable", "spring"]]
+collision_layer = 17
+script = ExtResource("1_1fwbs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_1fwbs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y1ylc")
+animation = &"jump"
+autoplay = "idle"

@@ -19,6 +19,7 @@ _data = {
 point_count = 4
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 17
 script = ExtResource("1_cjfdk")
 speed = 400.0
 jump_speed = -500.0
