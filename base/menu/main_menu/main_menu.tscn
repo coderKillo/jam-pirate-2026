@@ -210,6 +210,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_luyhs")
+minimal_button_size = Vector2(100, 100)
 
 [node name="MarginContainer" type="MarginContainer" parent="LevelSelect"]
 layout_mode = 1
@@ -246,7 +247,7 @@ text = "Select Level"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="LevelSelect/MarginContainer/PanelContainer/MarginContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 horizontal_scroll_mode = 0
 
@@ -255,7 +256,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
-columns = 5
+columns = 8
 
 [node name="Back" type="Button" parent="."]
 unique_name_in_owner = true

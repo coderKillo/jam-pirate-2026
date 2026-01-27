@@ -71,6 +71,7 @@ jump={
 2d_render/layer_6="window"
 2d_physics/layer_1="real-world"
 2d_physics/layer_2="virtual-world"
+2d_physics/layer_4="damage"
 2d_physics/layer_5="window"
 
 [rendering]
@@ -78,3 +79,4 @@ jump={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.0901961, 0.12549, 0.219608, 1)

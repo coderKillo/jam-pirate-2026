@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cot42wx71kkw4"]
+[gd_scene load_steps=4 format=3 uid="uid://cot42wx71kkw4"]
 
 [ext_resource type="Texture2D" uid="uid://fjwvvrbb0hxl" path="res://assets/selfmade/tv.png" id="1_cwrc8"]
+[ext_resource type="Script" uid="uid://102jmchb42w2" path="res://game/world/collection/tv.gd" id="1_opwd4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psvgy"]
 size = Vector2(46, 43)
 
 [node name="TV" type="Node2D"]
+script = ExtResource("1_opwd4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)

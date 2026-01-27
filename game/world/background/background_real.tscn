@@ -14,6 +14,7 @@ offset_bottom = -226.0
 color = Color(0.8, 0.886275, 0.882353, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 offset_left = -960.0
 offset_top = -399.0
 offset_right = 1040.0

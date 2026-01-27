@@ -9,7 +9,6 @@ var _scene_tree: SceneTree
 
 func close() -> void:
 	_scene_tree.paused = _initial_pause_state
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	queue_free()
 
 

@@ -36,6 +36,7 @@ func _on_setup_level():
 	_virtual_world.position = $World.position
 
 	virtual_player.set_player(SceneManager.current_level.player)
+	virtual_player.show()
 
 	_copy_real_world_to_virtual_world()
 
@@ -47,12 +48,16 @@ func _on_level_won():
 	var level := SceneManager.current_level as Level
 
 	level.player.control_enabled = false
+	level.player.hide()
+	virtual_player.hide()
 
 	window_display._enable = false
 
 	_tween = get_tree().create_tween()
 	_tween.set_parallel(true)
-	_tween.tween_property(window_display, "global_position", level.couch.global_position, 0.5)
+	_tween.tween_property(
+		window_display, "global_position", level.couch.global_position + Vector2.UP * 50.0, 0.5
+	)
 	_tween.tween_property(level.player, "global_position:x", level.couch.global_position.x, 0.2)
 	(
 		_tween
@@ -74,7 +79,8 @@ func _on_player_died():
 
 
 func _copy_real_world_to_virtual_world():
-	for spring in get_tree().get_nodes_in_group("spring"):
-		var virtual_spring = spring.make_copy()
-		_virtual_world.add_child(virtual_spring)
-		virtual_spring.position = spring.position
+	for child in SceneManager.current_level.real_world.get_children():
+		if child.is_in_group("spring"):
+			var virtual_spring = child.make_copy()
+			_virtual_world.add_child(virtual_spring)
+			virtual_spring.position = child.position

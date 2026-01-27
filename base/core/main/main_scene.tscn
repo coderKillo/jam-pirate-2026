@@ -57,7 +57,9 @@ level_container = NodePath("World")
 gui = NodePath("CanvasLayer/Gui")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.564962, 0.564962, 0.564962, 1)
+light_mask = 2
+visibility_layer = 2
+color = Color(0.456, 0.587733, 0.76, 1)
 
 [node name="World" type="Node2D" parent="."]
 position = Vector2(640, 360)

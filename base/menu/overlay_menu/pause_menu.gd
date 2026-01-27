@@ -3,6 +3,7 @@ extends OverlaidMenu
 
 func _ready():
 	%MainMenu.pressed.connect(_on_main_menu_pressed)
+	%Restart.pressed.connect(_on_restart_pressed)
 	%Continue.pressed.connect(_on_continue_pressed)
 
 
@@ -17,4 +18,5 @@ func _on_restart_pressed():
 
 
 func _on_continue_pressed():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	close()

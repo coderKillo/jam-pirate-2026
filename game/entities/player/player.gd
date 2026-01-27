@@ -13,6 +13,10 @@ var control_enabled := true
 var _speed := 0.0
 
 
+func _ready():
+	$Hurtbox.body_entered.connect(_on_damage_received)
+
+
 func _physics_process(delta):
 	if not control_enabled:
 		return
@@ -59,3 +63,7 @@ func _jump_on_spring(collision: KinematicCollision2D):
 		return
 	collider.play_animation()
 	velocity.y = -velocity.y * collider.power_multiply
+
+
+func _on_damage_received(_body):
+	Events.player_died.emit()

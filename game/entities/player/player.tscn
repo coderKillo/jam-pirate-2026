@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lubeg5j875jx"]
+[gd_scene load_steps=9 format=3 uid="uid://lubeg5j875jx"]
 
 [ext_resource type="Script" uid="uid://ct0wfkng0uvkm" path="res://game/entities/player/player.gd" id="1_cjfdk"]
 [ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_oic1i"]
@@ -17,6 +17,9 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 25, 12, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, -12, 0, 0, 0, 0, -11, -13)
 }
 point_count = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjfdk"]
+radius = 8.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
@@ -151,3 +154,10 @@ rotation = -3.10161
 
 [node name="LegStepTimer" type="Timer" parent="Body"]
 wait_time = 0.05
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_cjfdk")
