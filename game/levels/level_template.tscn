@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://7eh1kmaickso"]
+
+[ext_resource type="Script" uid="uid://gi24plob2g5t" path="res://game/levels/level.gd" id="1_ic1hw"]
+[ext_resource type="TileSet" uid="uid://d220qv2d4bci6" path="res://game/levels/tileset.tres" id="2_e7nd3"]
+[ext_resource type="PackedScene" uid="uid://lubeg5j875jx" path="res://game/entities/player/player.tscn" id="3_3y0nw"]
+[ext_resource type="PackedScene" uid="uid://cot42wx71kkw4" path="res://game/world/collection/tv.tscn" id="3_blj8w"]
+[ext_resource type="PackedScene" uid="uid://b2s7ptu8nju1" path="res://game/world/collection/couch.tscn" id="5_ofauc"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_ic1hw")
+
+[node name="Sketch" type="Sprite2D" parent="."]
+
+[node name="StaticCamera" type="Camera2D" parent="."]
+
+[node name="RealWorld" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="RealWorld"]
+position = Vector2(60, -1)
+scale = Vector2(1.5, 1.5)
+tile_set = ExtResource("2_e7nd3")
+
+[node name="TV" parent="RealWorld" instance=ExtResource("3_blj8w")]
+position = Vector2(486, 124)
+
+[node name="VirtualWorld" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="VirtualWorld"]
+position = Vector2(60, -1)
+scale = Vector2(1.5, 1.5)
+tile_set = ExtResource("2_e7nd3")
+
+[node name="Couch" parent="VirtualWorld" instance=ExtResource("5_ofauc")]
+position = Vector2(144, 125)
+
+[node name="Player" parent="." instance=ExtResource("3_3y0nw")]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1y145dxhfdpd"]
+
+[ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_lcln6"]
+[ext_resource type="Texture2D" uid="uid://c487jim654pgq" path="res://game/levels/sketches/level_0011_Ebene-6.png" id="2_lcln6"]
+
+[node name="Level6" instance=ExtResource("1_lcln6")]
+level_index = 5
+
+[node name="Sketch" parent="." index="0"]
+texture = ExtResource("2_lcln6")
