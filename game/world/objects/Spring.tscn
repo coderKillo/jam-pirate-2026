@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bxnfignt4xwg8" path="res://assets/selfmade/spring.png" id="1_31i82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1fwbs"]
-radius = 13.0
+radius = 16.0
+height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2f27a"]
 atlas = ExtResource("1_31i82")
@@ -63,13 +64,14 @@ animations = [{
 
 [node name="Spring" type="RigidBody2D" groups=["moveable", "spring"]]
 collision_layer = 17
+lock_rotation = true
 script = ExtResource("1_1fwbs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+rotation = 1.57079
 shape = SubResource("CapsuleShape2D_1fwbs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y1ylc")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"

@@ -71,8 +71,9 @@ jump={
 2d_render/layer_6="window"
 2d_physics/layer_1="real-world"
 2d_physics/layer_2="virtual-world"
-2d_physics/layer_4="damage"
+2d_physics/layer_4="damage-real"
 2d_physics/layer_5="window"
+2d_physics/layer_8="damage-virtual"
 
 [rendering]
 
