@@ -1,10 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk2fjx4jvt4jc"]
+[gd_scene load_steps=8 format=3 uid="uid://bk2fjx4jvt4jc"]
 
 [ext_resource type="Texture2D" uid="uid://b6nue4w7g524b" path="res://assets/free-city-ruin-backgrounds-pixel-art/background 1/orig.png" id="1_buqia"]
 [ext_resource type="Texture2D" uid="uid://dvul1pxmalblx" path="res://assets/selfmade/background/industry3.png" id="1_d3rrg"]
 [ext_resource type="Texture2D" uid="uid://b7s1lxs5qp55b" path="res://assets/jungle parallax background/3.png" id="3_wb1fh"]
 [ext_resource type="Texture2D" uid="uid://bvct6ybg160dv" path="res://assets/jungle parallax background/2.png" id="4_68nf5"]
 [ext_resource type="Texture2D" uid="uid://blsxh4mrayqw8" path="res://assets/jungle parallax background/1.png" id="5_ucm52"]
+[ext_resource type="Shader" uid="uid://dl45fyk66vdgg" path="res://game/shader/godray.gdshader" id="6_d3rrg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wb1fh"]
+shader = ExtResource("6_d3rrg")
+shader_parameter/angle = -0.15
+shader_parameter/position = -0.025
+shader_parameter/spread = 0.5
+shader_parameter/cutoff = 0.235
+shader_parameter/falloff = 0.29
+shader_parameter/edge_fade = 0.15
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.0
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.345
+shader_parameter/color = Color(1, 0.900833, 0.65, 0.796078)
+shader_parameter/hdr = true
+shader_parameter/seed = 5.0
 
 [node name="BackgroundVirtual" type="Node2D"]
 
@@ -13,7 +30,7 @@ offset_left = -960.0
 offset_top = -399.0
 offset_right = 1040.0
 offset_bottom = 447.0
-color = Color(0.83172, 0.87, 0.5829, 1)
+color = Color(0.643137, 0.866667, 0.858824, 1)
 
 [node name="Background5" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -42,3 +59,10 @@ visible = false
 position = Vector2(46, -4)
 scale = Vector2(2, 2)
 texture = ExtResource("5_ucm52")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wb1fh")
+offset_left = -653.0
+offset_top = -365.0
+offset_right = 711.0
+offset_bottom = 365.0

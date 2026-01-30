@@ -58,18 +58,10 @@ func _on_level_won():
 	_tween.tween_property(
 		window_display, "global_position", level.couch.global_position + Vector2.UP * 50.0, 0.5
 	)
-	_tween.tween_property(level.player, "global_position:x", level.couch.global_position.x, 0.2)
-	(
-		_tween
-		. tween_property(
-			level.player, "global_position:y", level.player.global_position.y + 25, 0.5
-		)
-		. set_trans(Tween.TRANS_ELASTIC)
-		. set_ease(Tween.EASE_OUT)
-	)
 
 
 func _on_tv_collected():
+	window_display.get_node("AnimationPlayer").play("on")
 	window_display.global_position = SceneManager.current_level.tv.global_position
 	window_display._enable = true
 

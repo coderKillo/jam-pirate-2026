@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=21 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
@@ -39,6 +39,90 @@ viewport_path = NodePath("VirtualViewPort")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ociif"]
 size = Vector2(240, 180)
+
+[sub_resource type="Animation" id="Animation_x0q8c"]
+resource_name = "on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WindowBG:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ViewportTexture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1e-05, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WindowArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_3p8nd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WindowBG:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ViewportTexture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WindowArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bicih"]
+_data = {
+&"RESET": SubResource("Animation_3p8nd"),
+&"on": SubResource("Animation_x0q8c")
+}
 
 [node name="MainScene" type="Control" node_paths=PackedStringArray("level_container", "gui")]
 layout_mode = 3
@@ -109,10 +193,12 @@ color = Color(1.3, 1.1, 1, 1)
 
 [node name="WindowBG" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
 position = Vector2(0, -2)
+scale = Vector2(1e-05, 1)
 texture = ExtResource("6_x0q8c")
 
 [node name="ViewportTexture" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
 material = SubResource("ShaderMaterial_dn4rf")
+scale = Vector2(1e-05, 1)
 texture = SubResource("ViewportTexture_qe2dj")
 region_enabled = true
 region_rect = Rect2(0, 0, 240, 180)
@@ -124,6 +210,12 @@ script = ExtResource("7_6icyu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindowCanvesLayer/WindowDisplay/WindowArea"]
 shape = SubResource("RectangleShape2D_ociif")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WindowCanvesLayer/WindowDisplay"]
+libraries = {
+&"": SubResource("AnimationLibrary_bicih")
+}
 
 [node name="VirtualViewPort" type="SubViewport" parent="."]
 size = Vector2i(1280, 720)
