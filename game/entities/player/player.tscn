@@ -1,9 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://lubeg5j875jx"]
+[gd_scene load_steps=16 format=3 uid="uid://lubeg5j875jx"]
 
 [ext_resource type="Script" uid="uid://ct0wfkng0uvkm" path="res://game/entities/player/player.gd" id="1_cjfdk"]
 [ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_oic1i"]
 [ext_resource type="Script" uid="uid://s2t4ilq88ay" path="res://game/entities/player/body.gd" id="3_v0nmi"]
 [ext_resource type="PackedScene" uid="uid://biyuiwqw7krg3" path="res://game/entities/player/leg.tscn" id="4_dhej3"]
+[ext_resource type="AudioStream" uid="uid://bq6xvh5sw72mm" path="res://assets/sound_effects/stepwater_1.wav" id="5_v0nmi"]
+[ext_resource type="Script" uid="uid://df43nire6hsuu" path="res://game/entities/player/player_audio.gd" id="6_dhej3"]
+[ext_resource type="Script" uid="uid://dt0d0oo8x44u3" path="res://game/sound/audio_queue.gd" id="7_dhej3"]
+[ext_resource type="AudioStream" uid="uid://bude04tfvq6ij" path="res://assets/sound_effects/stepwater_2.wav" id="8_kn1iv"]
+[ext_resource type="AudioStream" uid="uid://ca7wrbmb234sd" path="res://assets/sound_effects/stepdirt_1.wav" id="9_igs2l"]
+[ext_resource type="AudioStream" uid="uid://co0icu631y10s" path="res://assets/sound_effects/stepdirt_2.wav" id="10_p5qu6"]
+[ext_resource type="AudioStream" uid="uid://bhh0hk7l6vyfy" path="res://assets/sound_effects/slime_jump.wav" id="11_p5qu6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iddec"]
 radius = 6.0
@@ -161,3 +168,25 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_cjfdk")
+
+[node name="PlayerAudio" type="Node2D" parent="."]
+script = ExtResource("6_dhej3")
+
+[node name="WaterStepsQueue" type="Node2D" parent="PlayerAudio"]
+script = ExtResource("7_dhej3")
+steams = Array[AudioStream]([ExtResource("5_v0nmi"), ExtResource("8_kn1iv")])
+throttle_time = 0.1
+pitch_max = 1.3
+metadata/_custom_type_script = "uid://dt0d0oo8x44u3"
+
+[node name="GroundStepsQueue" type="Node2D" parent="PlayerAudio"]
+script = ExtResource("7_dhej3")
+steams = Array[AudioStream]([ExtResource("9_igs2l"), ExtResource("10_p5qu6")])
+throttle_time = 0.1
+pitch_min = 0.6
+pitch_max = 0.8
+metadata/_custom_type_script = "uid://dt0d0oo8x44u3"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
+stream = ExtResource("11_p5qu6")
+volume_db = -6.0

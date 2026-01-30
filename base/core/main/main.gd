@@ -7,6 +7,7 @@ extends Control
 @onready var window_display: WindowDisplay = $WindowCanvesLayer/WindowDisplay
 @onready var virtual_world_container: Node2D = $VirtualViewPort/Container
 @onready var virtual_player: VirtualPlayer = $VirtualViewPort/VirtualPlayer
+@onready var music: AudioStreamPlayer = $BackgroundMusic
 
 var _virtual_world: Node2D
 
@@ -16,6 +17,7 @@ var _tween: Tween
 func _ready():
 	Events.level_setup.connect(_on_setup_level)
 	Events.level_won.connect(_on_level_won)
+	Events.level_lose.connect(_on_level_lose)
 	Events.tv_collected.connect(_on_tv_collected)
 	Events.player_died.connect(_on_player_died)
 
@@ -43,6 +45,8 @@ func _on_setup_level():
 	window_display._enable = false
 	window_display.global_position = window_display.disable_position
 
+	music.stream_paused = false
+
 
 func _on_level_won():
 	var level := SceneManager.current_level as Level
@@ -59,11 +63,19 @@ func _on_level_won():
 		window_display, "global_position", level.couch.global_position + Vector2.UP * 50.0, 0.5
 	)
 
+	$LevelWonSound.play()
+	music.stream_paused = true
+
+
+func _on_level_lose():
+	$LevelLosSound.play()
+
 
 func _on_tv_collected():
 	window_display.get_node("AnimationPlayer").play("on")
 	window_display.global_position = SceneManager.current_level.tv.global_position
 	window_display._enable = true
+	$TvCollectedSound.play()
 
 
 func _on_player_died():

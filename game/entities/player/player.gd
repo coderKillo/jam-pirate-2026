@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var jump_speed = -400.0
 
 @onready var body: Body = $Body
+@onready var audio: PlayerAudio = $PlayerAudio
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var control_enabled := true
@@ -15,6 +16,7 @@ var _speed := 0.0
 
 func _ready():
 	$Hurtbox.body_entered.connect(_on_damage_received)
+	Events.player_step.connect(_on_player_step)
 
 
 func _physics_process(delta):
@@ -24,6 +26,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		audio.play_jump()
 		velocity.y = jump_speed
 
 	var direction = Input.get_axis("left", "right")
@@ -67,3 +70,10 @@ func _jump_on_spring(collision: KinematicCollision2D):
 
 func _on_damage_received(_body):
 	Events.player_died.emit()
+
+
+func _on_player_step():
+	if get_collision_layer_value(Global.WORLD_LAYER):
+		audio.play_water_step_sound()
+	else:
+		audio.play_ground_step_sound()

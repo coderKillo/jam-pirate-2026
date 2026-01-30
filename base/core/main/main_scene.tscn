@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=28 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
@@ -6,10 +6,16 @@
 [ext_resource type="Script" uid="uid://dctg78ljek1r4" path="res://game/world/death_zone.gd" id="3_x0q8c"]
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="4_dn4rf"]
 [ext_resource type="Script" uid="uid://cx71xp8b2igrn" path="res://game/world/window/window_display.gd" id="4_ugwa6"]
+[ext_resource type="Shader" uid="uid://61ho0rrn7rsc" path="res://game/shader/lightning.gdshader" id="5_3p8nd"]
 [ext_resource type="PackedScene" uid="uid://bk2fjx4jvt4jc" path="res://game/world/background/background_virtual.tscn" id="5_bicih"]
 [ext_resource type="Texture2D" uid="uid://bl0w7mn1mk4ch" path="res://assets/selfmade/tv_frame.png" id="6_x0q8c"]
 [ext_resource type="Script" uid="uid://bsbyrdhdjck38" path="res://game/world/window/window_area.gd" id="7_6icyu"]
 [ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
+[ext_resource type="AudioStream" uid="uid://blhtgiq3hxp3a" path="res://assets/music/Loop.wav" id="12_bicih"]
+[ext_resource type="AudioStream" uid="uid://cxrp3377dg07" path="res://assets/sound_effects/newthingget.ogg" id="14_0h0lk"]
+[ext_resource type="AudioStream" uid="uid://bu23c15kywhlc" path="res://assets/sound_effects/rain_on_window_loop.wav" id="14_ax4ej"]
+[ext_resource type="AudioStream" uid="uid://dexxms5nb722t" path="res://assets/sound_effects/losetrumpet.wav" id="14_cyqf4"]
+[ext_resource type="AudioStream" uid="uid://bywlu2yycoir7" path="res://assets/sound_effects/pop1.ogg" id="16_0h0lk"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ugwa6"]
 
@@ -30,6 +36,15 @@ shader_parameter/blur = 0.002
 shader_parameter/colour = Color(1, 1, 1, 1)
 shader_parameter/size = Vector2(0.02, 0.2)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bicih"]
+shader = ExtResource("5_3p8nd")
+shader_parameter/frequency = 9.36
+shader_parameter/dimLevel = 0.705
+shader_parameter/brightnessRange = 0.78
+shader_parameter/brightnessOffset = 0.022
+shader_parameter/tintColor = Color(0, 0, 0, 1)
+shader_parameter/tintBrightness = 0.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dn4rf"]
 shader = ExtResource("4_dn4rf")
 shader_parameter/sample_offset = Vector2(0, 0)
@@ -39,45 +54,6 @@ viewport_path = NodePath("VirtualViewPort")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ociif"]
 size = Vector2(240, 180)
-
-[sub_resource type="Animation" id="Animation_x0q8c"]
-resource_name = "on"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WindowBG:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ViewportTexture:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.233333, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1), Vector2(1e-05, 1), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WindowArea/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_3p8nd"]
 length = 0.001
@@ -108,14 +84,53 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("WindowArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("WindowArea:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_x0q8c"]
+resource_name = "on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WindowBG:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ViewportTexture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1), Vector2(1e-05, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WindowArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bicih"]
@@ -181,6 +196,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0.12, 0.12, 1)
 
+[node name="Lightning effect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_bicih")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -6.0
+offset_right = 12.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="WindowCanvesLayer" type="CanvasLayer" parent="."]
 
 [node name="WindowDisplay" type="Node2D" parent="WindowCanvesLayer"]
@@ -206,11 +237,11 @@ region_rect = Rect2(0, 0, 240, 180)
 [node name="WindowArea" type="Area2D" parent="WindowCanvesLayer/WindowDisplay"]
 collision_layer = 0
 collision_mask = 16
+monitoring = false
 script = ExtResource("7_6icyu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WindowCanvesLayer/WindowDisplay/WindowArea"]
 shape = SubResource("RectangleShape2D_ociif")
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WindowCanvesLayer/WindowDisplay"]
 libraries = {
@@ -242,3 +273,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("12_bicih")
+autoplay = true
+bus = &"Music"
+
+[node name="RainSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("14_ax4ej")
+volume_db = -20.0
+autoplay = true
+bus = &"SFX"
+
+[node name="LevelWonSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("14_0h0lk")
+volume_db = -5.0
+pitch_scale = 0.9
+bus = &"SFX"
+
+[node name="LevelLosSound" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("14_cyqf4")
+volume_db = -3.0
+bus = &"SFX"
+
+[node name="TvCollectedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_0h0lk")
+volume_db = 10.0
+pitch_scale = 0.6
+bus = &"SFX"

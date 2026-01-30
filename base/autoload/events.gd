@@ -11,3 +11,5 @@ signal enable_view(enable: bool)
 signal tv_collected
 
 signal player_died
+
+signal player_step

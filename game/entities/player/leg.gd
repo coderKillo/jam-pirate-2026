@@ -42,6 +42,7 @@ func _physics_process(_delta):
 	if result:
 		_feet_position = result.position
 		_on_ground = true
+		Events.player_step.emit()
 	else:
 		_feet_position = end
 		_on_ground = false
