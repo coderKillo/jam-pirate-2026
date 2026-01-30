@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://b24hyh6mdq4yh"]
+[gd_scene load_steps=5 format=4 uid="uid://b24hyh6mdq4yh"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_c86s7"]
 [ext_resource type="Texture2D" uid="uid://hot5sru8ltj1" path="res://game/levels/sketches/level_0003_Ebene-14.png" id="2_c86s7"]
+[ext_resource type="Texture2D" uid="uid://c4fhgg8a0w8c2" path="res://assets/tutorial/tutorial_3.png" id="3_0e6we"]
 [ext_resource type="PackedScene" uid="uid://dyotv1uwjptxl" path="res://game/world/objects/Spring.tscn" id="3_t4u7i"]
 
 [node name="Level14" instance=ExtResource("1_c86s7")]
@@ -10,6 +11,10 @@ level_index = 13
 [node name="Sketch" parent="." index="0"]
 visible = false
 texture = ExtResource("2_c86s7")
+
+[node name="Tutorial" type="Sprite2D" parent="." index="1"]
+modulate = Color(1, 1, 1, 0.536)
+texture = ExtResource("3_0e6we")
 
 [node name="TileMapLayer" parent="RealWorld" index="0"]
 tile_map_data = PackedByteArray("AADu/wcAAAACAAAAAADv/wcAAAACAAAAAADw/wcAAAACAAAAAADx/wcAAAACAAAAAADy/wcAAAACAAAAAADz/wcAAAACAAAAAAD0/wcAAAACAAAAAAD1/wcAAAACAAAAAAD2/wcAAAACAAAAAAD3/wcAAAACAAAAAAD4/wcAAAACAAAAAAD5/wcAAAACAAAAAAD6/wcAAAACAAAAAAD7/wcAAAACAAAAAAD8/wcAAAACAAAAAAD9/wcAAAACAAAAAAADAAcAAAACAAAAAAAEAAcAAAACAAAAAAAFAAcAAAACAAAAAAAGAAcAAAACAAAAAAAHAAcAAAACAAAAAAAIAAcAAAACAAAAAAAJAAcAAAACAAAAAAAKAAcAAAACAAAAAAALAAcAAAACAAAAAAAMAAcAAAACAAAAAAANAAcAAAACAAAAAAAOAAcAAAACAAAAAAAPAAcAAAACAAAAAAD9////AAAAAAAAAAD+////AAACAAAAAAD/////AAACAAAAAAAAAP//AAACAAAAAAABAP//AAACAAAAAAACAP//AAACAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAA=")
@@ -30,5 +35,5 @@ tile_map_data = PackedByteArray("AAAPAAkAAAAAAAIAAgAPAAgAAAABAAIAAwAPAAcAAAAAAAI
 [node name="Couch" parent="VirtualWorld" index="1"]
 position = Vector2(454, -271)
 
-[node name="Player" parent="." index="4"]
+[node name="Player" parent="." index="5"]
 position = Vector2(-532, 149)
