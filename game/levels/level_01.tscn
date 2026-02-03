@@ -1,18 +1,19 @@
-[gd_scene load_steps=4 format=4 uid="uid://te5783y5h2i2"]
+[gd_scene load_steps=6 format=4 uid="uid://te5783y5h2i2"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_2o7nm"]
 [ext_resource type="Texture2D" uid="uid://ccgramhf72orf" path="res://game/levels/sketches/level_0016_Ebene-1.png" id="2_6621e"]
 [ext_resource type="Texture2D" uid="uid://cenps0iheporc" path="res://assets/tutorial/tutorial_1.png" id="3_a2cy5"]
+[ext_resource type="Script" uid="uid://dw0w8h2vh3nss" path="res://game/levels/tutorial.gd" id="3_uop84"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uop84"]
+normal = Vector2(-1, 0)
+distance = 82.0
 
 [node name="Level1" instance=ExtResource("1_2o7nm")]
 
 [node name="Sketch" parent="." index="0"]
 visible = false
 texture = ExtResource("2_6621e")
-
-[node name="Tutorial" type="Sprite2D" parent="." index="1"]
-modulate = Color(1, 1, 1, 0.381)
-texture = ExtResource("3_a2cy5")
 
 [node name="TileMapLayer" parent="RealWorld" index="0"]
 tile_map_data = PackedByteArray("AAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAADt/wcAAAABAAAAAADu/wcAAAABAAAAAADv/wcAAAABAAAAAADw/wcAAAABAAAAAADx/wcAAAABAAAAAADy/wcAAAABAAAAAADz/wcAAAABAAAAAAD0/wcAAAABAAAAAAD1/wcAAAABAAAAAAD2/wcAAAABAAAAAAD3/wcAAAABAAAAAAD4/wcAAAABAAAAAAD5/wcAAAABAAAAAAD6/wcAAAABAAAAAAD7/wcAAAABAAAAAAD8/wcAAAABAAAAAAADAAcAAAABAAAAAAAEAAcAAAABAAAAAAAFAAcAAAABAAAAAAAGAAcAAAABAAAAAAAHAAcAAAABAAAAAAAIAAcAAAABAAAAAAAJAAcAAAABAAAAAAAKAAcAAAABAAAAAAALAAcAAAABAAAAAAAMAAcAAAABAAAAAAANAAcAAAABAAAAAAAOAAcAAAABAAAAAAAPAAcAAAABAAAAAAAQAAcAAAABAAAAAAARAAcAAAABAAAAAAD9/wQAAAABAAAAAAD+/wQAAAABAAAAAAD//wQAAAABAAAAAAAAAAQAAAABAAAAAAABAAQAAAABAAAAAAACAAQAAAABAAAAAAA=")
@@ -26,5 +27,56 @@ tile_map_data = PackedByteArray("AAD8/wQAAAAAAAIAAAD9/wQAAAABAAIAAAD+/wUAAAABAAM
 [node name="Couch" parent="VirtualWorld" index="1"]
 position = Vector2(523, 208)
 
-[node name="Player" parent="." index="5"]
+[node name="Player" parent="." index="4"]
 position = Vector2(-543, 167)
+
+[node name="Tutorial" type="Node2D" parent="." index="5" node_paths=PackedStringArray("player", "jump_area", "window_move_area")]
+modulate = Color(1, 1, 1, 0.436)
+script = ExtResource("3_uop84")
+player = NodePath("../Player")
+jump_area = NodePath("JumpArea")
+window_move_area = NodePath("MoveDisplayArea")
+
+[node name="Tutorial1" type="Sprite2D" parent="Tutorial" index="0"]
+position = Vector2(-510, 107)
+texture = ExtResource("3_a2cy5")
+region_enabled = true
+region_rect = Rect2(17, 420, 258, 132)
+
+[node name="Tutorial2" type="Sprite2D" parent="Tutorial" index="1"]
+position = Vector2(-166, 80)
+texture = ExtResource("3_a2cy5")
+region_enabled = true
+region_rect = Rect2(345, 319, 257, 277)
+
+[node name="Tutorial3" type="Sprite2D" parent="Tutorial" index="2"]
+position = Vector2(61, -8)
+texture = ExtResource("3_a2cy5")
+region_enabled = true
+region_rect = Rect2(609, 268, 185, 166)
+
+[node name="Tutorial4" type="Sprite2D" parent="Tutorial" index="3"]
+position = Vector2(269, -23)
+texture = ExtResource("3_a2cy5")
+region_enabled = true
+region_rect = Rect2(875, 430, 352, 243)
+
+[node name="Tutorial5" type="Sprite2D" parent="Tutorial" index="4"]
+position = Vector2(495, 64)
+texture = ExtResource("3_a2cy5")
+region_enabled = true
+region_rect = Rect2(993, 142, 211, 150)
+
+[node name="JumpArea" type="Area2D" parent="Tutorial" index="5"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/JumpArea" index="0"]
+shape = SubResource("WorldBoundaryShape2D_uop84")
+
+[node name="MoveDisplayArea" type="StaticBody2D" parent="Tutorial" index="6"]
+collision_layer = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/MoveDisplayArea" index="0"]
+position = Vector2(645, 1)
+shape = SubResource("WorldBoundaryShape2D_uop84")

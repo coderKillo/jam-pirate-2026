@@ -7,6 +7,7 @@ func _ready():
 
 
 func _on_body_entered(body: PhysicsBody2D):
+	print("Body entered: ", body)
 	body.set_collision_layer_value(Global.VIRTUAL_LAYER, true)
 	body.set_collision_layer_value(Global.WORLD_LAYER, false)
 	body.set_collision_mask_value(Global.VIRTUAL_LAYER, true)
