@@ -50,7 +50,7 @@ shape = SubResource("CircleShape2D_iddec")
 [node name="Body" type="Node2D" parent="." node_paths=PackedStringArray("legs")]
 use_parent_material = true
 script = ExtResource("3_v0nmi")
-height = 30.0
+height = 25.0
 tail_length = 65.0
 head_length = 15.0
 body_segments = 20.0
@@ -60,12 +60,14 @@ legs = [NodePath("Leg"), NodePath("Leg2"), NodePath("Leg3"), NodePath("Leg4")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 use_parent_material = true
 position = Vector2(7.62939e-06, -12)
+length = 35.0
 anchor = NodePath("../Shoulder")
 
 [node name="Leg3" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 use_parent_material = true
 position = Vector2(4.54747e-13, 11)
+length = 35.0
 anchor = NodePath("../Hip")
 
 [node name="Line2D" type="Line2D" parent="Body"]
@@ -120,12 +122,14 @@ region_rect = Rect2(438, 116, 19, 19)
 modulate = Color(0.8, 0.8, 0.8, 1)
 use_parent_material = true
 position = Vector2(7.62939e-06, -12)
+length = 35.0
 anchor = NodePath("../Shoulder")
 
 [node name="Leg4" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.8, 0.8, 0.8, 1)
 use_parent_material = true
 position = Vector2(4.54747e-13, 11)
+length = 35.0
 anchor = NodePath("../Hip")
 
 [node name="Shoulder" type="Node2D" parent="Body"]

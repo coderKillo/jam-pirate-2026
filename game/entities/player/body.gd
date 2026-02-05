@@ -44,14 +44,14 @@ func _ready():
 func _physics_process(_delta):
 	var space_rid = get_world_2d().space
 	var space_state = PhysicsServer2D.space_get_direct_state(space_rid)
-	var query = PhysicsRayQueryParameters2D.create(
-		player.global_position, player.global_position + Vector2.DOWN * tail_length
-	)
+	var start = Vector2(tail.global_position.x, player.global_position.y)
+	var end = start + (Vector2.DOWN * tail_length)
+	var query = PhysicsRayQueryParameters2D.create(start, end)
 	var result = space_state.intersect_ray(query)
 	if result:
 		tail_ground_anchor.global_position = result.position
 	else:
-		tail_ground_anchor.global_position = tail.global_position + Vector2.DOWN * tail_length
+		tail_ground_anchor.global_position = end
 
 
 func _process(delta):
@@ -77,6 +77,9 @@ func _process(delta):
 	_constrain_joints(hip, shoulder, height)
 
 	_move_to_axis(tail, tail_ground_anchor, "y", delta)
+	if tail.global_position.y > tail_ground_anchor.global_position.y:
+		tail.global_position.y = tail_ground_anchor.global_position.y
+
 	_constrain_joints(tail, hip, tail_length)
 
 	_update_line()

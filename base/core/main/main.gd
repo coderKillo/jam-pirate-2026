@@ -88,3 +88,8 @@ func _copy_real_world_to_virtual_world():
 			var virtual_spring = child.make_copy()
 			_virtual_world.add_child(virtual_spring)
 			virtual_spring.position = child.position
+
+		if child.is_in_group("platform"):
+			var virtual_platform = child.make_copy()
+			_virtual_world.add_child(virtual_platform)
+			virtual_platform.position = child.position
