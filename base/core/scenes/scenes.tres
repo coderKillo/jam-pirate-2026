@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SceneResource" load_steps=25 format=3 uid="uid://dryquut2g4dy0"]
+[gd_resource type="Resource" script_class="SceneResource" load_steps=33 format=3 uid="uid://dryquut2g4dy0"]
 
 [ext_resource type="PackedScene" uid="uid://te5783y5h2i2" path="res://game/levels/level_01.tscn" id="1_334li"]
 [ext_resource type="PackedScene" uid="uid://dtj3674kg1td3" path="res://game/levels/gym.tscn" id="1_hfkje"]
@@ -17,17 +17,25 @@
 [ext_resource type="PackedScene" uid="uid://cqb3yvpwnjmg8" path="res://game/levels/level_08.tscn" id="8_pguox"]
 [ext_resource type="PackedScene" uid="uid://dt36fp5rfsq04" path="res://game/levels/level_09.tscn" id="9_kfr8n"]
 [ext_resource type="PackedScene" uid="uid://82tdfjxcf5s2" path="res://game/levels/level_10.tscn" id="10_1a6v7"]
-[ext_resource type="PackedScene" uid="uid://c26itump8jlk4" path="res://game/levels/level_11.tscn" id="11_qg1kj"]
-[ext_resource type="PackedScene" uid="uid://f4djwdo0rdix" path="res://game/levels/level_12.tscn" id="12_e481s"]
-[ext_resource type="PackedScene" uid="uid://cdtelhr7h36a3" path="res://game/levels/level_13.tscn" id="13_mdw36"]
-[ext_resource type="PackedScene" uid="uid://b24hyh6mdq4yh" path="res://game/levels/level_14.tscn" id="14_yqgs3"]
-[ext_resource type="PackedScene" uid="uid://c7kb5dbcc7glo" path="res://game/levels/level_15.tscn" id="15_65fts"]
-[ext_resource type="PackedScene" uid="uid://blunnaib3iosk" path="res://game/levels/level_16.tscn" id="16_cn7l0"]
-[ext_resource type="PackedScene" uid="uid://btjyv5mhcaras" path="res://game/levels/level_17.tscn" id="17_4csfl"]
+[ext_resource type="PackedScene" uid="uid://bcwx2kn2v6fpn" path="res://game/levels/level_11.tscn" id="11_qg1kj"]
+[ext_resource type="PackedScene" uid="uid://ggxerspskspp" path="res://game/levels/level_12.tscn" id="12_e481s"]
+[ext_resource type="PackedScene" uid="uid://c26itump8jlk4" path="res://game/levels/level_21.tscn" id="12_hfkje"]
+[ext_resource type="PackedScene" uid="uid://f4djwdo0rdix" path="res://game/levels/level_22.tscn" id="13_8uw0r"]
+[ext_resource type="PackedScene" uid="uid://bkkxrl27e50oq" path="res://game/levels/level_13.tscn" id="13_mdw36"]
+[ext_resource type="PackedScene" uid="uid://cdtelhr7h36a3" path="res://game/levels/level_23.tscn" id="14_h8hwl"]
+[ext_resource type="PackedScene" uid="uid://cc2xiop7xk4ct" path="res://game/levels/level_14.tscn" id="14_yqgs3"]
+[ext_resource type="PackedScene" uid="uid://cjc6a8f05k704" path="res://game/levels/level_15.tscn" id="15_65fts"]
+[ext_resource type="PackedScene" uid="uid://b24hyh6mdq4yh" path="res://game/levels/level_24.tscn" id="15_hv1dv"]
+[ext_resource type="PackedScene" uid="uid://m06ii5g2lijq" path="res://game/levels/level_16.tscn" id="16_cn7l0"]
+[ext_resource type="PackedScene" uid="uid://c7kb5dbcc7glo" path="res://game/levels/level_25.tscn" id="16_pcpyd"]
+[ext_resource type="PackedScene" uid="uid://dee6tmuw8l64d" path="res://game/levels/level_17.tscn" id="17_4csfl"]
+[ext_resource type="PackedScene" uid="uid://blunnaib3iosk" path="res://game/levels/level_26.tscn" id="17_pguox"]
+[ext_resource type="PackedScene" uid="uid://btjyv5mhcaras" path="res://game/levels/level_27.tscn" id="18_kfr8n"]
+[ext_resource type="PackedScene" uid="uid://b7y16osq3fecu" path="res://game/levels/level_18.tscn" id="19_qg1kj"]
 
 [resource]
 script = ExtResource("2_wlkvt")
-levels = Array[PackedScene]([ExtResource("1_334li"), ExtResource("2_4csfl"), ExtResource("3_hfkje"), ExtResource("4_8uw0r"), ExtResource("5_h8hwl"), ExtResource("6_hv1dv"), ExtResource("7_pcpyd"), ExtResource("8_pguox"), ExtResource("9_kfr8n"), ExtResource("10_1a6v7"), ExtResource("11_qg1kj"), ExtResource("12_e481s"), ExtResource("13_mdw36"), ExtResource("14_yqgs3"), ExtResource("15_65fts"), ExtResource("16_cn7l0"), ExtResource("17_4csfl")])
+levels = Array[PackedScene]([ExtResource("1_334li"), ExtResource("2_4csfl"), ExtResource("3_hfkje"), ExtResource("4_8uw0r"), ExtResource("5_h8hwl"), ExtResource("6_hv1dv"), ExtResource("7_pcpyd"), ExtResource("8_pguox"), ExtResource("9_kfr8n"), ExtResource("10_1a6v7"), ExtResource("11_qg1kj"), ExtResource("12_e481s"), ExtResource("13_mdw36"), ExtResource("14_yqgs3"), ExtResource("15_65fts"), ExtResource("16_cn7l0"), ExtResource("17_4csfl"), ExtResource("19_qg1kj"), ExtResource("12_hfkje"), ExtResource("13_8uw0r"), ExtResource("14_h8hwl"), ExtResource("15_hv1dv"), ExtResource("16_pcpyd"), ExtResource("17_pguox"), ExtResource("18_kfr8n")])
 gym = ExtResource("1_hfkje")
 main_menu = ExtResource("1_wlkvt")
 main_scene = ExtResource("2_louti")

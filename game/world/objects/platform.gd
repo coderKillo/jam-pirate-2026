@@ -24,12 +24,15 @@ extends Path2D
 @export var in_virtual_world := true
 @export var has_top_traps := true
 @export var has_bottom_traps := true
+@export var move_in_real_world := true
+@export var move_in_virtual_world := true
 
 @onready var _path_follow: PathFollow2D = $PathFollow2D
 @onready var _virtual_sprite: Sprite2D = $AnimatableBody2D/VirtualSprite
 @onready var _real_spirte: Sprite2D = $AnimatableBody2D/RealSprite
 @onready var _body: AnimatableBody2D = $AnimatableBody2D
 @onready var _hitbox: StaticBody2D = $AnimatableBody2D/Hitbox
+@onready var _world_checker: StaticBody2D = $AnimatableBody2D/WorldChecker
 @onready var _line: Line2D = $Line2D
 
 var virtual_copy: Sprite2D
@@ -39,8 +42,13 @@ var _path_follow_direction := 1
 
 func _ready():
 	if in_real_world and in_virtual_world:
-		WindowArea.set_monitor_layer(_body, true)
-		WindowArea.body_to_world(_body, true)
+		_hitbox.set_collision_layer_value(Global.VIRTUAL_DMG_LAYER, true)
+		_hitbox.set_collision_layer_value(Global.REAL_DMG_LAYER, true)
+		_body.set_collision_layer_value(Global.VIRTUAL_LAYER, true)
+		_body.set_collision_layer_value(Global.WORLD_LAYER, true)
+		_body.set_collision_mask_value(Global.VIRTUAL_LAYER, true)
+		_body.set_collision_mask_value(Global.WORLD_LAYER, true)
+		WindowArea.set_monitor_layer(_body, false)
 	elif in_real_world:
 		WindowArea.set_monitor_layer(_body, false)
 		WindowArea.body_to_world(_body, true)
@@ -52,19 +60,22 @@ func _ready():
 		WindowArea.hitbox_to_world(_hitbox, false)
 		_real_spirte.hide()
 
-	if has_top_traps:
-		_real_spirte.get_node("TrapsTop").show()
-		_virtual_sprite.get_node("TrapsTop").show()
-		_hitbox.get_node("CollisionTop").disabled = false
+	_real_spirte.get_node("TrapsTop").visible = has_top_traps
+	_virtual_sprite.get_node("TrapsTop").visible = has_top_traps
+	_hitbox.get_node("CollisionTop").disabled = not has_top_traps
 
-	if has_bottom_traps:
-		_real_spirte.get_node("TrapsBottom").show()
-		_virtual_sprite.get_node("TrapsBottom").show()
-		_hitbox.get_node("CollisionBottom").disabled = false
+	_real_spirte.get_node("TrapsBottom").visible = has_bottom_traps
+	_virtual_sprite.get_node("TrapsBottom").visible = has_bottom_traps
+	_hitbox.get_node("CollisionBottom").disabled = not has_bottom_traps
 
 
 func _process(delta):
 	if Engine.is_editor_hint():
+		return
+
+	if not move_in_real_world and _world_checker.get_collision_layer_value(Global.WORLD_LAYER):
+		return
+	if not move_in_virtual_world and _world_checker.get_collision_layer_value(Global.VIRTUAL_LAYER):
 		return
 
 	var new_progress = _path_follow.progress + _path_follow_direction * speed * delta
@@ -83,6 +94,7 @@ func _process(delta):
 
 func make_copy() -> Node2D:
 	virtual_copy = _virtual_sprite.duplicate()
+	virtual_copy.global_position = _virtual_sprite.global_position
 	_virtual_sprite.hide()
 
 	return virtual_copy
@@ -109,4 +121,4 @@ func update_follow():
 	if not Engine.is_editor_hint():
 		return
 	if is_instance_valid(_path_follow):
-		_path_follow.progress_ratio = start_position
+		_path_follow.progress = start_position * length
