@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cmmq3qk054d8m"]
+[gd_scene load_steps=13 format=3 uid="uid://cmmq3qk054d8m"]
 
 [ext_resource type="Script" uid="uid://dcr3vuytcemx4" path="res://base/menu/main_menu/main_menu.gd" id="1_1jjd6"]
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_lue4o"]
@@ -18,6 +18,12 @@ shader_parameter/speed = 50.0
 shader_parameter/blur = 0.002
 shader_parameter/colour = Color(0.37, 0.37, 0.37, 1)
 shader_parameter/size = Vector2(0.02, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6qop"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61fet"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -40,15 +46,7 @@ volume_db = -20.0
 autoplay = true
 bus = &"SFX"
 
-[node name="Menu" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="TextureRect" parent="Menu"]
+[node name="Background" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.156863)
 layout_mode = 1
 anchors_preset = 15
@@ -58,18 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_xq2ug")
 
-[node name="Title" type="TextureRect" parent="Menu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -480.0
-offset_right = 480.0
-offset_bottom = 200.0
-grow_horizontal = 2
-texture = ExtResource("4_ocgfb")
-
-[node name="RainEffect" type="ColorRect" parent="Menu"]
+[node name="RainEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ocgfb")
 layout_mode = 1
 anchors_preset = 15
@@ -84,6 +71,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(1, 0.12, 0.12, 1)
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="TextureRect" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -480.0
+offset_right = 480.0
+offset_bottom = 200.0
+grow_horizontal = 2
+texture = ExtResource("4_ocgfb")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -154,6 +161,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="PanelContainer" type="PanelContainer" parent="Option/MarginContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a6qop")
 
 [node name="MarginContainer" type="MarginContainer" parent="Option/MarginContainer/PanelContainer"]
 layout_mode = 2
@@ -264,6 +272,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="PanelContainer" type="PanelContainer" parent="LevelSelect/MarginContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_61fet")
 
 [node name="MarginContainer" type="MarginContainer" parent="LevelSelect/MarginContainer/PanelContainer"]
 layout_mode = 2

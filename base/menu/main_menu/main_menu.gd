@@ -21,6 +21,7 @@ func _ready():
 
 	if OS.has_feature("web"):
 		%Quit.hide()
+		%Title.hide()
 
 
 ## Handler

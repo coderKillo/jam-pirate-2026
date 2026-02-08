@@ -38,8 +38,7 @@ has_top_traps = false
 has_bottom_traps = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(-88.3883, -88.3883)
-rotation = 0.785398
+position = Vector2(-100, 0)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
@@ -55,6 +54,8 @@ end_cap_mode = 2
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 position = Vector2(-88.3883, -88.3883)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_t3fq8")
@@ -66,10 +67,12 @@ collision_mask = 0
 [node name="CollisionTop" type="CollisionShape2D" parent="AnimatableBody2D/Hitbox"]
 position = Vector2(-0.0730896, -12.5731)
 shape = SubResource("RectangleShape2D_0gwkp")
+disabled = true
 
 [node name="CollisionBottom" type="CollisionShape2D" parent="AnimatableBody2D/Hitbox"]
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_okyi0")
+disabled = true
 
 [node name="VirtualSprite" type="Sprite2D" parent="AnimatableBody2D"]
 texture = SubResource("CompressedTexture2D_okyi0")
@@ -77,12 +80,14 @@ region_enabled = true
 region_rect = Rect2(128, 160, 128, 16)
 
 [node name="TrapsTop" type="Sprite2D" parent="AnimatableBody2D/VirtualSprite"]
+visible = false
 position = Vector2(0, -16)
 texture = SubResource("CompressedTexture2D_okyi0")
 region_enabled = true
 region_rect = Rect2(128, 144, 128, 16)
 
 [node name="TrapsBottom" type="Sprite2D" parent="AnimatableBody2D/VirtualSprite"]
+visible = false
 position = Vector2(0, 16)
 texture = SubResource("CompressedTexture2D_okyi0")
 region_enabled = true
@@ -94,12 +99,14 @@ region_enabled = true
 region_rect = Rect2(0, 160, 128, 16)
 
 [node name="TrapsTop" type="Sprite2D" parent="AnimatableBody2D/RealSprite"]
+visible = false
 position = Vector2(0, -16)
 texture = ExtResource("2_mm5bo")
 region_enabled = true
 region_rect = Rect2(0, 144, 128, 16)
 
 [node name="TrapsBottom" type="Sprite2D" parent="AnimatableBody2D/RealSprite"]
+visible = false
 position = Vector2(0, 16)
 texture = ExtResource("2_mm5bo")
 region_enabled = true
