@@ -30,3 +30,5 @@ position = Vector2(415, 144)
 
 [node name="Player" parent="." index="5"]
 position = Vector2(-347, 111)
+speed = 400.0
+jump_speed = -400.0

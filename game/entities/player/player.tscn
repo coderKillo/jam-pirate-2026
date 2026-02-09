@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://lubeg5j875jx"]
+[gd_scene load_steps=17 format=3 uid="uid://lubeg5j875jx"]
 
 [ext_resource type="Script" uid="uid://ct0wfkng0uvkm" path="res://game/entities/player/player.gd" id="1_cjfdk"]
 [ext_resource type="Texture2D" uid="uid://cckbxnlteu7gv" path="res://assets/kenney_platformer-art-pixel-redux/Tilemap/tilemap.png" id="2_oic1i"]
 [ext_resource type="Script" uid="uid://s2t4ilq88ay" path="res://game/entities/player/body.gd" id="3_v0nmi"]
 [ext_resource type="PackedScene" uid="uid://biyuiwqw7krg3" path="res://game/entities/player/leg.tscn" id="4_dhej3"]
+[ext_resource type="Texture2D" uid="uid://b05equ7hh4v0y" path="res://assets/selfmade/head.png" id="5_heu0c"]
 [ext_resource type="AudioStream" uid="uid://bq6xvh5sw72mm" path="res://assets/sound_effects/stepwater_1.wav" id="5_v0nmi"]
 [ext_resource type="Script" uid="uid://df43nire6hsuu" path="res://game/entities/player/player_audio.gd" id="6_dhej3"]
 [ext_resource type="Script" uid="uid://dt0d0oo8x44u3" path="res://game/sound/audio_queue.gd" id="7_dhej3"]
@@ -13,10 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://bhh0hk7l6vyfy" path="res://assets/sound_effects/slime_jump.wav" id="11_p5qu6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iddec"]
-radius = 6.0
+radius = 15.0
 
 [sub_resource type="Curve" id="Curve_iddec"]
-_data = [Vector2(0, 0.449438), 0.0, 10.0924, 0, 0, Vector2(0.154255, 0.966292), 0.0, -0.17603, 0, 0, Vector2(0.547872, 0.966292), 0.603531, 0.603531, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.516854), 0.0, 10.0924, 0, 0, Vector2(0.12234, 0.921348), -0.570908, -0.570908, 0, 0, Vector2(0.37234, 0.898876), -1.11177, -1.11177, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Curve2D" id="Curve2D_iddec"]
@@ -26,13 +27,13 @@ _data = {
 point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjfdk"]
-radius = 8.0
+radius = 22.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
 script = ExtResource("1_cjfdk")
-speed = 400.0
-jump_speed = -500.0
+start_speed = 50.0
+jump_speed = -450.0
 
 [node name="Tail2" type="Sprite2D" parent="."]
 visible = false
@@ -52,7 +53,7 @@ use_parent_material = true
 script = ExtResource("3_v0nmi")
 height = 25.0
 tail_length = 65.0
-head_length = 15.0
+head_length = 10.0
 body_segments = 20.0
 legs = [NodePath("Leg"), NodePath("Leg2"), NodePath("Leg3"), NodePath("Leg4")]
 
@@ -60,20 +61,23 @@ legs = [NodePath("Leg"), NodePath("Leg2"), NodePath("Leg3"), NodePath("Leg4")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 use_parent_material = true
 position = Vector2(7.62939e-06, -12)
-length = 35.0
+length = 25.0
 anchor = NodePath("../Shoulder")
 
 [node name="Leg3" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.6, 0.6, 0.6, 1)
 use_parent_material = true
 position = Vector2(4.54747e-13, 11)
-length = 35.0
+length = 25.0
 anchor = NodePath("../Hip")
 
 [node name="Line2D" type="Line2D" parent="Body"]
 use_parent_material = true
-width = 15.0
+width = 18.0
 width_curve = SubResource("Curve_iddec")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Tail" type="Sprite2D" parent="Body"]
 visible = false
@@ -94,42 +98,24 @@ region_rect = Rect2(625, 189, 13, 13)
 
 [node name="Head" type="Sprite2D" parent="Body"]
 use_parent_material = true
-position = Vector2(-11, -13)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_oic1i")
-region_enabled = true
+position = Vector2(-14.745, -13)
+scale = Vector2(2, 2)
+texture = ExtResource("5_heu0c")
+offset = Vector2(0, -4.945)
 region_rect = Rect2(533, 217, 13, 10)
-
-[node name="Head2" type="Sprite2D" parent="Body/Head"]
-modulate = Color(0, 0, 0, 1)
-use_parent_material = true
-position = Vector2(-4.16667, -1.66667)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_oic1i")
-region_enabled = true
-region_rect = Rect2(438, 116, 19, 19)
-
-[node name="Head3" type="Sprite2D" parent="Body/Head"]
-modulate = Color(0, 0, 0, 1)
-use_parent_material = true
-position = Vector2(4.16667, -1.66667)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_oic1i")
-region_enabled = true
-region_rect = Rect2(438, 116, 19, 19)
 
 [node name="Leg2" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.8, 0.8, 0.8, 1)
 use_parent_material = true
 position = Vector2(7.62939e-06, -12)
-length = 35.0
+length = 25.0
 anchor = NodePath("../Shoulder")
 
 [node name="Leg4" parent="Body" node_paths=PackedStringArray("anchor") instance=ExtResource("4_dhej3")]
 modulate = Color(0.8, 0.8, 0.8, 1)
 use_parent_material = true
 position = Vector2(4.54747e-13, 11)
-length = 35.0
+length = 25.0
 anchor = NodePath("../Hip")
 
 [node name="Shoulder" type="Node2D" parent="Body"]

@@ -9,7 +9,7 @@ extends Node2D
 
 @export var legs: Array[Legs]
 
-@onready var head: Node2D = $Head
+@onready var head: Sprite2D = $Head
 @onready var hip: Node2D = $Hip
 @onready var shoulder: Node2D = $Shoulder
 @onready var tail: Node2D = $Tail
@@ -62,6 +62,7 @@ func _process(delta):
 
 	if _is_running():
 		_head_offset = Vector2(sign(_direction.x) * head_length, 0.0)
+		head.flip_h = sign(_direction.x) > 0
 	else:
 		_head_offset = Vector2(sign(_direction.x) * head_length, -height)
 
