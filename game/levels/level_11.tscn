@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=4 uid="uid://bcwx2kn2v6fpn"]
+[gd_scene load_steps=5 format=4 uid="uid://bcwx2kn2v6fpn"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_vmxri"]
 [ext_resource type="Texture2D" uid="uid://mva51d0yok70" path="res://game/levels/sketches/levels_0007_Ebene-0.png" id="2_vmxri"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="3_n6fd1"]
+
+[sub_resource type="Curve2D" id="Curve2D_n6fd1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -225, 0, 0, 0, 0, 0, 225, 0)
+}
+point_count = 2
 
 [node name="Level11" instance=ExtResource("1_vmxri")]
 level_index = 10
@@ -19,7 +25,9 @@ position = Vector2(467, -56)
 
 [node name="Platform" parent="RealWorld" index="2" instance=ExtResource("3_n6fd1")]
 position = Vector2(49, 30)
-length = 500.0
+curve = SubResource("Curve2D_n6fd1")
+length = 450.0
+speed = 90.0
 
 [node name="TileMapLayer" parent="VirtualWorld" index="0"]
 tile_map_data = PackedByteArray("AADu/wUAAAACAAEAAADv/wUAAAACAAEAAADw/wUAAAACAAEAAADx/wUAAAACAAEAAADy/wUAAAACAAEAAADz/wUAAAACAAEAAAD0/wUAAAACAAEAAAD1/wUAAAACAAEAAAD2/wUAAAACAAEAAAANAP//AAACAAEAAAAOAP//AAACAAEAAAAPAP//AAACAAEAAAA=")
