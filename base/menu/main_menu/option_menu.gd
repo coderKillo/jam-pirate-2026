@@ -6,11 +6,15 @@ func _ready():
 	%MusicVolume.value = AppSettings.get_bus_volume(AudioServer.get_bus_index("Music"))
 	%SfxVolume.value = AppSettings.get_bus_volume(AudioServer.get_bus_index("SFX"))
 	%Mute.button_pressed = AppSettings.is_muted()
+	%MouseSensitifity.value = AppSettings.mouse_sensitifity()
 
 	%MasterVolume.value_changed.connect(_on_bus_volume_changed.bind("Master"))
 	%MusicVolume.value_changed.connect(_on_bus_volume_changed.bind("Music"))
 	%SfxVolume.value_changed.connect(_on_bus_volume_changed.bind("SFX"))
 	%Mute.toggled.connect(_on_mute_toggled)
+
+	%MouseSensitifity.value = AppSettings.mouse_sensitifity()
+	%MouseSensitifity.value_changed.connect(func(value): AppSettings.set_mouse_sensitifity(value))
 
 
 func _on_bus_volume_changed(value: float, bus: String):

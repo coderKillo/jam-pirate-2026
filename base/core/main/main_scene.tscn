@@ -217,6 +217,7 @@ size_flags_vertical = 3
 [node name="WindowDisplay" type="Node2D" parent="WindowCanvesLayer"]
 position = Vector2(650, 427)
 script = ExtResource("4_ugwa6")
+bounding_box = Rect2(120, 90, 1040, 540)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="WindowCanvesLayer/WindowDisplay"]
 position = Vector2(-482, -135)

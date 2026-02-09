@@ -11,6 +11,9 @@ const MUTE_SETTING = &"Mute"
 const MASTER_BUS_INDEX = 0
 const SYSTEM_BUS_NAME_PREFIX = "_"
 
+const MOUSE_SENSITIFITY = &"MouseSens"
+const DEFAULT_MOUSE_SENSE = 1.0
+
 # Input
 static var default_action_events: Dictionary
 static var initial_bus_volumes: Array
@@ -66,6 +69,17 @@ static func set_audio_from_config() -> void:
 
 
 # Video
+
+# Gameplay
+
+
+static func mouse_sensitifity() -> float:
+	return Config.get_config(GAME_SECTION, MOUSE_SENSITIFITY, DEFAULT_MOUSE_SENSE)
+
+
+static func set_mouse_sensitifity(value: float) -> void:
+	Config.set_config(GAME_SECTION, MOUSE_SENSITIFITY, value)
+
 
 # All
 
