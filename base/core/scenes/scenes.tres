@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SceneResource" load_steps=33 format=3 uid="uid://dryquut2g4dy0"]
+[gd_resource type="Resource" script_class="SceneResource" load_steps=34 format=3 uid="uid://dryquut2g4dy0"]
 
 [ext_resource type="PackedScene" uid="uid://te5783y5h2i2" path="res://game/levels/level_01.tscn" id="1_334li"]
 [ext_resource type="PackedScene" uid="uid://dtj3674kg1td3" path="res://game/levels/gym.tscn" id="1_hfkje"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://blunnaib3iosk" path="res://game/levels/level_26.tscn" id="17_pguox"]
 [ext_resource type="PackedScene" uid="uid://btjyv5mhcaras" path="res://game/levels/level_27.tscn" id="18_kfr8n"]
 [ext_resource type="PackedScene" uid="uid://b7y16osq3fecu" path="res://game/levels/level_18.tscn" id="19_qg1kj"]
+[ext_resource type="PackedScene" uid="uid://h0mgu43ccb2v" path="res://base/menu/common/scene_changer.tscn" id="32_e481s"]
 
 [resource]
 script = ExtResource("2_wlkvt")
@@ -42,3 +43,4 @@ main_scene = ExtResource("2_louti")
 win_menu = ExtResource("6_aa17h")
 lose_menu = ExtResource("2_cnso4")
 pause_menu = ExtResource("5_aa17h")
+transition = ExtResource("32_e481s")

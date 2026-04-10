@@ -26,6 +26,7 @@ Events="*res://base/autoload/events.gd"
 SceneManager="*res://base/autoload/scene_manager.gd"
 AppConfig="*res://base/autoload/app_config.gd"
 Screenshot="*res://base/autoload/screenshot.gd"
+AnimationController="*res://base/autoload/animation_controller.gd"
 
 [display]
 
@@ -84,4 +85,5 @@ jump={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.0901961, 0.12549, 0.219608, 1)

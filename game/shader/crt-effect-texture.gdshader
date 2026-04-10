@@ -1,8 +1,15 @@
-shader_type canvas_item;
+// CRT with Luminance Preservation (no scanlines) by Harrison Allen
+// Public domain
 
-uniform sampler2D tex : filter_nearest, repeat_disable;
-uniform vec4 bg_color : source_color;
-// CRT controls
+shader_type canvas_item;
+render_mode blend_mix;
+
+/**
+	The input texture that will have the CRT effect applied to it.
+	This should be supplied by a subviewport texture rendered at a lower res.
+	*/
+
+
 /**
 	Set the type of mask this CRT will have.
 	Dots: emulates a typical PC CRT monitor.
@@ -40,6 +47,7 @@ uniform float mask_brightness : hint_range(0, 1) = 1.0;
 	*/
 uniform float aspect : hint_range(0.5, 1.0) = 0.75;
 
+uniform vec4 region_rect = vec4(0, 0, 1, 1);
 
 vec2 warp(vec2 uv, float _aspect, float _curve)
 {
@@ -84,7 +92,7 @@ vec3 srgb_to_linear(vec3 col)
 }
 
 // Get color from coordinates (returns in linear color)
-vec3 sample(vec2 uv)
+vec3 sample(vec2 uv, sampler2D tex)
 {
 	// Set coordinates to match texture dimensions
 	uv *= vec2(textureSize(tex, 0));
@@ -231,18 +239,29 @@ vec3 apply_mask(vec3 linear_color, vec2 fragcoord)
 	return primary_col;
 }
 
-void fragment() {
-    vec2 uv = warp(UV, aspect, curve);
-
-    // Discard pixels outside the curved screen boundary
-    if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-        COLOR = bg_color;
-    }
-	else
-	{
-		vec3 col = sample(uv);
-		col = apply_mask(col, FRAGCOORD.xy);
-		col = linear_to_srgb(col);
-		COLOR.rgb = col;
+void fragment()
+{
+	vec2 local_uv = (UV - region_rect.xy) / region_rect.zw;
+	vec4 color = vec4(0.0);
+	if (local_uv.x < 0.0 || local_uv.x > 1.0 || local_uv.y < 0.0 || local_uv.y > 1.0) {
+		COLOR = vec4(0.0);
 	}
+	else{
+		// Warp UV coordinates
+		vec2 warped_local_uv = warp(local_uv, aspect, curve);
+		if (warped_local_uv.x < 0.0 || warped_local_uv.x > 1.0 || warped_local_uv.y < 0.0 || warped_local_uv.y > 1.0) {
+			COLOR = vec4(0.0);
+		}
+		else
+		{
+			vec2 uv_in_region = (warped_local_uv * region_rect.zw) + region_rect.xy;
+			vec3 col = sample(uv_in_region, TEXTURE);
+			col = apply_mask(col, FRAGCOORD.xy);
+			col = linear_to_srgb(col);
+			COLOR.rgb = col;
+		}
+	}
+	
+
+	
 }

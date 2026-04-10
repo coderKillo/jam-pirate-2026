@@ -8,3 +8,4 @@ extends Resource
 @export var win_menu: PackedScene
 @export var lose_menu: PackedScene
 @export var pause_menu: PackedScene
+@export var transition: PackedScene

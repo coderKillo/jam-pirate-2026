@@ -1,56 +1,25 @@
-// simple rain/snow shader
-// useful learning resources:
-// https://www.ronja-tutorials.com/post/034-2d-sdf-basics/#circle
-// https://iquilezles.org/articles/distfunctions2d/
-
 shader_type canvas_item;
 
-// can make snow by adjusting values
-uniform int count: hint_range(0, 2000) = 150;
-uniform float slant: hint_range(-0.1, 0.1) = -0.01;
-uniform float speed: hint_range(25.0, 100.0) = 50.0;
-uniform float blur: hint_range(0.0005, 0.1) = 0.002;
-uniform vec4 colour: source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec2 size = vec2(0.005, 0.2);
-
-float line_sdf(vec2 p, vec2 s) {
-    vec2 d = abs(p) - s;
-    return min(max(d.x, d.y), 0.0) + length(max(d, 0.0));
-}
-
-float Hash(float x) {
-    return fract(sin(x * 18.34) * 51.78);
-}
-
-float Hash2(float x) {
-    return fract(sin(x * 25.42) * 21.24);
-}
+uniform vec4 color: source_color = vec4(0.5);
+uniform float speed: hint_range(0.01, 10.0, 0.01) = 0.1;
+uniform float density: hint_range(1.0, 500.0, 1.0) = 100.0;
+uniform float compression: hint_range(0.1, 1.0, 0.01) = 0.2;
+uniform float trail_size: hint_range(5.0, 100.0, 0.1) = 50.0;
+uniform float brightness: hint_range(0.1, 10.0, 0.1) = 5.0;
 
 void fragment() {
-	// inspector issue with tiny vec 2
-    vec2 s = size * 0.1;
-	// to work at the start
-    float time = TIME + 1000.0;
-    vec2 uv = UV;
-	// slant each line left or right
-    uv.x += uv.y * slant;
-    float output = 0.0;
-
-    for (int i = 1; i <= count; i++) {
-        float h1 = Hash(float(i));
-        float h2 = Hash2(float(i));
-		// make it so the lines move in the direction of the slant as well
-		// otherwise they would go directly down no matter what slant is
-        float sl = h1 * uv.y * -slant;
-		// compute random x position of line, multiply by 1.2 to cover the far edges more predictably
-        float pos_mod_x = h1 * 1.2;
-		// there is probably better way to do this, to prevent line from moving too slow compared to other lines
-        float pos_mod_y = max(h2 * speed, pos_mod_x * speed);
-		// wrap y values around to loop the anim
-        vec2 position = vec2(pos_mod_x + sl, -mod(-pos_mod_y * time * 0.1, -1.));
-        float sdf = line_sdf(uv - position, s);
-        output += clamp(- sdf / blur, 0.0, 1.0);
-    }
-
-    COLOR = vec4(colour.rgb, output);
+	vec2 uv = -SCREEN_UV;
+	float time = TIME * speed;
+	uv.x *= density;
+	vec2 duv = vec2(floor(uv.x), uv.y) * compression;
+	float offset = sin(duv.x);
+	float fall = cos(duv.x * 30.0);
+	float trail = mix(100.0, trail_size, fall);
+	float drop = fract(duv.y + time * fall + offset) * trail;
+	drop = 1.0 / drop;
+	drop = smoothstep(0.0, 1.0, drop * drop);
+	drop = sin(drop * PI) * fall * brightness;
+	float shape = sin(fract(uv.x) * PI);
+	drop *= shape * shape;
+	COLOR = max(vec4(color.rgb, drop * color.a), vec4(.0));
 }

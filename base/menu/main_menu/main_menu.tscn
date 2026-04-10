@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cmmq3qk054d8m"]
+[gd_scene load_steps=15 format=3 uid="uid://cmmq3qk054d8m"]
 
 [ext_resource type="Script" uid="uid://dcr3vuytcemx4" path="res://base/menu/main_menu/main_menu.gd" id="1_1jjd6"]
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_lue4o"]
@@ -7,17 +7,25 @@
 [ext_resource type="AudioStream" uid="uid://blhtgiq3hxp3a" path="res://assets/music/Loop.wav" id="3_ocgfb"]
 [ext_resource type="Texture2D" uid="uid://b4yyqivbgjvpf" path="res://assets/selfmade/background/industry.png" id="3_xq2ug"]
 [ext_resource type="AudioStream" uid="uid://bu23c15kywhlc" path="res://assets/sound_effects/rain_on_window_loop.wav" id="4_a6qop"]
-[ext_resource type="Shader" uid="uid://xkx8ybjqpbpx" path="res://game/shader/rain.gdshader" id="4_obtv4"]
-[ext_resource type="Texture2D" uid="uid://bmluu6w0pulpm" path="res://assets/selfmade/banner3.png" id="4_ocgfb"]
+[ext_resource type="Shader" uid="uid://blsgos1l0wtgb" path="res://game/shader/ripples.gdshader" id="7_4qnme"]
+[ext_resource type="Texture2D" uid="uid://3uphn3tyyxd" path="res://assets/selfmade/title.png" id="7_61fet"]
+[ext_resource type="PackedScene" uid="uid://cub5ixau0orgh" path="res://base/menu/common/animated_button.tscn" id="8_61fet"]
+[ext_resource type="PackedScene" uid="uid://cu3qgpflgrsi2" path="res://game/vfx/screen_effects.tscn" id="11_cr0ba"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocgfb"]
-shader = ExtResource("4_obtv4")
-shader_parameter/count = 35
-shader_parameter/slant = 0.1
-shader_parameter/speed = 50.0
-shader_parameter/blur = 0.002
-shader_parameter/colour = Color(0.37, 0.37, 0.37, 1)
-shader_parameter/size = Vector2(0.02, 0.2)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ea0i1"]
+shader = ExtResource("7_4qnme")
+shader_parameter/waveAmplitude = 0.25
+shader_parameter/correctVertex = true
+shader_parameter/waveFrequency = 10.0
+shader_parameter/verticalWave = true
+shader_parameter/keepTransparency = true
+shader_parameter/useTime = true
+shader_parameter/waveSpeed = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/firstHalf = 0.5
+shader_parameter/secondHalf = 0.5
+shader_parameter/freezeFirstHalf = false
+shader_parameter/freezeSecondHalf = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6qop"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -30,6 +38,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_lue4o")
@@ -56,22 +66,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_xq2ug")
 
-[node name="RainEffect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_ocgfb")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -3.0
-offset_right = 6.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(1, 0.12, 0.12, 1)
-
 [node name="Menu" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -82,6 +76,7 @@ grow_vertical = 2
 
 [node name="Title" type="TextureRect" parent="Menu"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ea0i1")
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -90,7 +85,7 @@ offset_left = -480.0
 offset_right = 480.0
 offset_bottom = 200.0
 grow_horizontal = 2
-texture = ExtResource("4_ocgfb")
+texture = ExtResource("7_61fet")
 
 [node name="MarginContainer" type="MarginContainer" parent="Menu"]
 layout_mode = 1
@@ -112,30 +107,48 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Continue" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Continue" parent="Menu/MarginContainer/VBoxContainer" instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
-[node name="NewGame" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="NewGame" parent="Menu/MarginContainer/VBoxContainer" instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 
-[node name="LevelSelect" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="LevelSelect" parent="Menu/MarginContainer/VBoxContainer" instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Select Level"
 
-[node name="Options" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Options" parent="Menu/MarginContainer/VBoxContainer" instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Options"
 
-[node name="Quit" type="Button" parent="Menu/MarginContainer/VBoxContainer"]
+[node name="Quit" parent="Menu/MarginContainer/VBoxContainer" instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="Feedback" parent="Menu" instance=ExtResource("8_61fet")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 1065.0
+offset_top = -90.0
+offset_right = 1263.0
+offset_bottom = -50.0
+grow_horizontal = 1
+grow_vertical = 0
+size_flags_horizontal = 0
+text = "Feedback"
 
 [node name="Option" type="Control" parent="."]
 visible = false
@@ -335,17 +348,20 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 8
 
-[node name="Back" type="Button" parent="."]
+[node name="Back" parent="." instance=ExtResource("8_61fet")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
 anchors_preset = 2
+anchor_left = 0.0
 anchor_top = 1.0
+anchor_right = 0.0
 anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = -40.0
 offset_right = 70.0
 offset_bottom = -9.0
+grow_horizontal = 1
 grow_vertical = 0
 size_flags_horizontal = 0
 text = "back"
@@ -371,3 +387,8 @@ title = "New Game"
 position = Vector2i(0, 36)
 size = Vector2i(418, 100)
 dialog_text = "Starting a new game will reset all game data."
+
+[node name="ScreenEffects" parent="." instance=ExtResource("11_cr0ba")]
+layout_mode = 1
+
+[editable path="ScreenEffects"]

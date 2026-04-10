@@ -1,10 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvm8aoo8xb6an"]
+[gd_scene load_steps=10 format=3 uid="uid://dvm8aoo8xb6an"]
 
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_arlhe"]
 [ext_resource type="Script" uid="uid://dk4r15rsdgfso" path="res://base/menu/overlay_menu/lose_menu.gd" id="1_l4nqj"]
+[ext_resource type="Shader" uid="uid://yljgri6fhfdw" path="res://game/shader/double-dither.gdshader" id="3_ddyh2"]
+[ext_resource type="PackedScene" uid="uid://cub5ixau0orgh" path="res://base/menu/common/animated_button.tscn" id="3_osi2r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2af3h"]
+shader = ExtResource("3_ddyh2")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/pixel_size = 4.0
+shader_parameter/resolution = Vector2(640, 320)
+shader_parameter/dither_offset = Vector2(2, 0)
+shader_parameter/bayer_size = 2
+shader_parameter/interpolate = true
+shader_parameter/invert = true
+shader_parameter/falloff = 1.0
+shader_parameter/color = Color(0, 0, 0, 0.7)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_arlhe"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Animation" id="Animation_2af3h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ddyh2"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.51, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_em5uq"]
+_data = {
+&"RESET": SubResource("Animation_2af3h"),
+&"show": SubResource("Animation_ddyh2")
+}
 
 [node name="LoseMenu" type="Control"]
 process_mode = 3
@@ -18,6 +93,7 @@ theme = ExtResource("1_arlhe")
 script = ExtResource("1_l4nqj")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_2af3h")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +103,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.266667)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,10 +125,13 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "You died!"
+theme_override_colors/default_color = Color(0.643137, 0.866667, 0.858824, 1)
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[wave]You died!"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
@@ -65,14 +145,18 @@ fit_content = true
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="MainMenu" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MainMenu" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_osi2r")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Main Menu"
 
-[node name="Restart" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Restart" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_osi2r")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Restart"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_em5uq")
+}
+autoplay = "show"

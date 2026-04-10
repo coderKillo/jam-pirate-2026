@@ -5,10 +5,17 @@ extends Node
 var main: Main
 var current_level: Node
 
+var _transition: Control
+var _in_transition = false
+
 
 func _ready():
 	Events.level_won.connect(_on_game_won)
 	Events.level_lose.connect(_on_game_lose)
+
+	var transition = scene_resource.transition.instantiate()
+	add_child(transition)
+	_transition = transition.get_node("Transition")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,8 +36,17 @@ func load_game_scene():
 
 func load_main_menu():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if _in_transition:
+		return
+
+	_in_transition = true
+	await _do_transition(true)
+
 	get_tree().change_scene_to_packed(scene_resource.main_menu)
 	main = null
+
+	await _do_transition(false)
+	_in_transition = false
 
 
 func reload_level():
@@ -51,22 +67,33 @@ func level_size() -> int:
 
 func load_level(level: int):
 	assert(level < level_size())
+	GameState.set_current_level(level)
+	load_level_scene(scene_resource.levels[level])
+
+
+func load_level_scene(level_scene: PackedScene):
+	if _in_transition:
+		return
+
+	_in_transition = true
+	await _do_transition(true)
+
 	if not is_instance_valid(main):
 		load_game_scene()
-
-	GameState.set_current_level(level)
 
 	if is_instance_valid(current_level):
 		current_level.queue_free()
 		current_level = null
 
-	current_level = scene_resource.levels[level].instantiate()
+	current_level = level_scene.instantiate()
 
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if is_instance_valid(main.level_container):
 		main.level_container.call_deferred("add_child", current_level)
 	else:
 		main.call_deferred("add_child", current_level)
+
+	await _do_transition(false)
+	_in_transition = false
 
 
 func _on_game_won():
@@ -94,3 +121,20 @@ func _pause_game():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.pause_menu.instantiate()
 	main.gui.add_child(scene)
+
+
+# wait for transition to be finished
+func _do_transition(transition_in: bool) -> void:
+	const SHADER_HEIGHT_IN = 1.0
+	const SHADER_HEIGHT_OUT = -1.0
+	var transition_time = 1.0
+
+	var tween := get_tree().create_tween()
+	var to = SHADER_HEIGHT_IN if transition_in else SHADER_HEIGHT_OUT
+	var from = SHADER_HEIGHT_OUT if transition_in else SHADER_HEIGHT_IN
+	var duration = transition_time / 2.0
+
+	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween.tween_property(_transition, "material:shader_parameter/height", to, duration).from(from)
+
+	await tween.finished
