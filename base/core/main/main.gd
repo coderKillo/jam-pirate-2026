@@ -42,7 +42,7 @@ func _on_setup_level():
 
 	_copy_real_world_to_virtual_world()
 
-	window_display._enable = false
+	window_display.enable = false
 	window_display.global_position = window_display.disable_position
 
 	music.stream_paused = false
@@ -55,7 +55,7 @@ func _on_level_won():
 	level.player.hide()
 	virtual_player.hide()
 
-	window_display._enable = false
+	window_display.enable = false
 
 	_tween = get_tree().create_tween()
 	_tween.set_parallel(true)
@@ -74,8 +74,8 @@ func _on_level_lose():
 func _on_tv_collected():
 	window_display.get_node("AnimationPlayer").play("on")
 	window_display.global_position = SceneManager.current_level.tv.global_position
-	window_display._enable = true
 	$TvCollectedSound.play()
+	Events.start_wave.emit(window_display.global_position)
 
 
 func _on_player_died():

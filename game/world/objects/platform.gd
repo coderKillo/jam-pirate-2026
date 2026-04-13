@@ -89,7 +89,8 @@ func _process(delta):
 
 	_path_follow.progress = new_progress
 
-	virtual_copy.global_position = _virtual_sprite.global_position
+	if virtual_copy:
+		virtual_copy.global_position = _virtual_sprite.global_position
 
 
 func make_copy() -> Node2D:

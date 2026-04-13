@@ -1,12 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=28 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
 [ext_resource type="Script" uid="uid://dctg78ljek1r4" path="res://game/world/death_zone.gd" id="3_x0q8c"]
 [ext_resource type="Script" uid="uid://cx71xp8b2igrn" path="res://game/world/window/window_display.gd" id="4_ugwa6"]
+[ext_resource type="Texture2D" uid="uid://b21h281gje736" path="res://assets/selfmade/tv_animation.png" id="5_ax4ej"]
 [ext_resource type="PackedScene" uid="uid://bk2fjx4jvt4jc" path="res://game/world/background/background_virtual.tscn" id="5_bicih"]
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="6_oh5ki"]
-[ext_resource type="Texture2D" uid="uid://bl0w7mn1mk4ch" path="res://assets/selfmade/tv_frame.png" id="6_x0q8c"]
 [ext_resource type="Script" uid="uid://bsbyrdhdjck38" path="res://game/world/window/window_area.gd" id="7_6icyu"]
 [ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
 [ext_resource type="AudioStream" uid="uid://blhtgiq3hxp3a" path="res://assets/music/Loop.wav" id="12_bicih"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://dexxms5nb722t" path="res://assets/sound_effects/losetrumpet.wav" id="14_cyqf4"]
 [ext_resource type="PackedScene" uid="uid://cu3qgpflgrsi2" path="res://game/vfx/screen_effects.tscn" id="15_ax4ej"]
 [ext_resource type="AudioStream" uid="uid://bywlu2yycoir7" path="res://assets/sound_effects/pop1.ogg" id="16_0h0lk"]
+[ext_resource type="Shader" uid="uid://hb3ougyfuieb" path="res://game/shader/wave.gdshader" id="16_oh5ki"]
+[ext_resource type="Script" uid="uid://cwnxpycjhdsmv" path="res://game/vfx/wave_effect.gd" id="17_oh5ki"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ugwa6"]
 
@@ -33,12 +35,13 @@ viewport_path = NodePath("VirtualViewPort")
 resource_local_to_scene = true
 shader = ExtResource("6_oh5ki")
 shader_parameter/tex = SubResource("ViewportTexture_oh5ki")
-shader_parameter/bg_color = Color(0.529412, 0.290196, 0.164706, 1)
+shader_parameter/bg_color = Color(0.533333, 0.294118, 0.168627, 1)
 shader_parameter/mask_type = 0
 shader_parameter/curve = 0.1
 shader_parameter/color_offset = 0.0
 shader_parameter/mask_brightness = 0.75
 shader_parameter/aspect = 0.75
+shader_parameter/static_noise_intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ociif"]
 size = Vector2(240, 180)
@@ -48,22 +51,82 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WindowBG:scale")
+tracks/0/path = NodePath("WindowArea:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WindowArea:monitoring")
+tracks/1/path = NodePath("WindowBG:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VirtualRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VirtualRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WindowBG:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, -24)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:enable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -72,26 +135,87 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_x0q8c"]
 resource_name = "on"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WindowBG:scale")
+tracks/0/path = NodePath("WindowArea:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+"update": 1,
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WindowArea:monitoring")
+tracks/1/path = NodePath("WindowBG:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.8, 0.933333, 1.06667, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VirtualRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VirtualRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WindowBG:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.166667, 0.933333, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-16, -104), Vector2(-2, -104), Vector2(-2, -104), Vector2(-2, -24)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.39906, 1.59875, 1.89624),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:enable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -102,6 +226,16 @@ _data = {
 &"RESET": SubResource("Animation_3p8nd"),
 &"on": SubResource("Animation_x0q8c")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjp0b"]
+resource_local_to_scene = true
+shader = ExtResource("16_oh5ki")
+shader_parameter/strength = 0.1
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.895
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.101
 
 [node name="MainScene" type="Control" node_paths=PackedStringArray("level_container", "gui")]
 layout_mode = 3
@@ -149,11 +283,14 @@ position = Vector2(-482, -135)
 color = Color(1.3, 1.1, 1, 1)
 
 [node name="WindowBG" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
-position = Vector2(0, -2)
-scale = Vector2(1e-05, 1)
-texture = ExtResource("6_x0q8c")
+position = Vector2(-2, -24)
+scale = Vector2(2, 2)
+texture = ExtResource("5_ax4ej")
+hframes = 10
 
 [node name="VirtualRect" type="ColorRect" parent="WindowCanvesLayer/WindowDisplay"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 material = SubResource("ShaderMaterial_4jeu6")
 anchors_preset = 8
 anchor_left = 0.5
@@ -243,3 +380,16 @@ bus = &"SFX"
 
 [node name="ScreenEffects" parent="." instance=ExtResource("15_ax4ej")]
 layout_mode = 1
+
+[node name="WaveEffect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gjp0b")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("17_oh5ki")

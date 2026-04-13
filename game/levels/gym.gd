@@ -31,4 +31,3 @@ func _reload():
 	SceneManager.load_game_scene()
 	SceneManager.current_level = SceneManager.scene_resource.gym.instantiate()
 	SceneManager.main.level_container.call_deferred("add_child", SceneManager.current_level)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

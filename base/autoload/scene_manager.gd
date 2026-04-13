@@ -35,7 +35,6 @@ func load_game_scene():
 
 
 func load_main_menu():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if _in_transition:
 		return
 
@@ -100,7 +99,6 @@ func _on_game_won():
 	if not is_instance_valid(main):
 		return
 
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.win_menu.instantiate()
 	main.gui.add_child(scene)
 
@@ -109,7 +107,6 @@ func _on_game_lose():
 	if not is_instance_valid(main):
 		return
 
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.lose_menu.instantiate()
 	main.gui.add_child(scene)
 
@@ -118,7 +115,6 @@ func _pause_game():
 	if not is_instance_valid(main):
 		return
 
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	var scene = scene_resource.pause_menu.instantiate()
 	main.gui.add_child(scene)
 

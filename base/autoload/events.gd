@@ -13,3 +13,5 @@ signal tv_collected
 signal player_died
 
 signal player_step
+
+signal start_wave(pos: Vector2)

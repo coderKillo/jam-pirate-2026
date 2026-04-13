@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d220qv2d4bci6"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://d220qv2d4bci6"]
 
 [ext_resource type="Texture2D" uid="uid://brllshj6iqs72" path="res://assets/selfmade/tilemap.png" id="1_paudi"]
+[ext_resource type="Texture2D" uid="uid://k3bnqr57i13j" path="res://assets/selfmade/rain.png" id="2_juak7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asq6h"]
 texture = ExtResource("1_paudi")
@@ -305,6 +306,28 @@ texture_region_size = Vector2i(32, 32)
 4:6/1/terrains_peering_bit/top_left_corner = 1
 4:6/1/terrains_peering_bit/top_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yf81q"]
+texture = ExtResource("2_juak7")
+texture_region_size = Vector2i(32, 32)
+0:1/animation_columns = 6
+0:1/animation_mode = 1
+0:1/animation_frame_0/duration = 0.1
+0:1/animation_frame_1/duration = 0.1
+0:1/animation_frame_2/duration = 0.1
+0:1/animation_frame_3/duration = 0.1
+0:1/animation_frame_4/duration = 0.1
+0:1/animation_frame_5/duration = 0.1
+0:1/0 = 0
+0:0/animation_columns = 6
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 0.1
+0:0/animation_frame_1/duration = 0.1
+0:0/animation_frame_2/duration = 0.1
+0:0/animation_frame_3/duration = 0.1
+0:0/animation_frame_4/duration = 0.1
+0:0/animation_frame_5/duration = 0.1
+0:0/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -320,3 +343,4 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 terrain_set_0/terrain_1/name = "Floor"
 terrain_set_0/terrain_1/color = Color(0.532341, 0.622651, 0.478754, 1)
 sources/0 = SubResource("TileSetAtlasSource_asq6h")
+sources/1 = SubResource("TileSetAtlasSource_yf81q")

@@ -40,6 +40,7 @@ uniform float mask_brightness : hint_range(0, 1) = 1.0;
 	*/
 uniform float aspect : hint_range(0.5, 1.0) = 0.75;
 
+uniform float static_noise_intensity : hint_range(0.0, 1.0) = 0.06;
 
 vec2 warp(vec2 uv, float _aspect, float _curve)
 {
@@ -231,6 +232,11 @@ vec3 apply_mask(vec3 linear_color, vec2 fragcoord)
 	return primary_col;
 }
 
+vec2 random(vec2 uv){
+    uv = vec2(dot(uv, vec2(127.1,311.7)), dot(uv, vec2(269.5,183.3)));
+    return -1.0 + 2.0 * fract(sin(uv) * 43758.5453123);
+}
+
 void fragment() {
     vec2 uv = warp(UV, aspect, curve);
 
@@ -243,6 +249,11 @@ void fragment() {
 		vec3 col = sample(uv);
 		col = apply_mask(col, FRAGCOORD.xy);
 		col = linear_to_srgb(col);
+		
+		if (static_noise_intensity > 0.0){
+			vec2 resolution = vec2(240.0, 180.0);
+        	col.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
+    	}
 		COLOR.rgb = col;
 	}
 }
