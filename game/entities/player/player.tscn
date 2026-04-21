@@ -27,22 +27,19 @@ _data = {
 point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cjfdk"]
-radius = 22.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 17
+collision_layer = 19
+collision_mask = 3
 script = ExtResource("1_cjfdk")
-start_speed = 50.0
 jump_speed = -450.0
 
 [node name="Tail2" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(0.156863, 0.419608, 0, 1)
 position = Vector2(0, -14)
-scale = Vector2(0.784, 2.339)
 texture = ExtResource("2_oic1i")
 region_enabled = true
-region_rect = Rect2(625, 189, 13, 13)
+region_rect = Rect2(507, 116, 19, 19)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9.53674e-07)
@@ -180,3 +177,8 @@ metadata/_custom_type_script = "uid://dt0d0oo8x44u3"
 [node name="JumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
 stream = ExtResource("11_p5qu6")
 volume_db = -6.0
+
+[node name="DebugLine" type="Line2D" parent="."]
+top_level = true
+width = 5.0
+default_color = Color(0.928214, 0, 0.281132, 1)

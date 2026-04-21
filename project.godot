@@ -27,6 +27,7 @@ SceneManager="*res://base/autoload/scene_manager.gd"
 AppConfig="*res://base/autoload/app_config.gd"
 Screenshot="*res://base/autoload/screenshot.gd"
 AnimationController="*res://base/autoload/animation_controller.gd"
+Debug="*res://base/autoload/debug.gd"
 
 [display]
 

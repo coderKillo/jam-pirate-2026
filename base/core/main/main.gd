@@ -40,6 +40,8 @@ func _on_setup_level():
 	virtual_player.set_player(SceneManager.current_level.player)
 	virtual_player.show()
 
+	SceneManager.current_level.player.setup(window_display.window_area)
+
 	_copy_real_world_to_virtual_world()
 
 	window_display.enable = false

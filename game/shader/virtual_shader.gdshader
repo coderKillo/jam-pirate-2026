@@ -249,7 +249,7 @@ void fragment() {
 		vec3 col = sample(uv);
 		col = apply_mask(col, FRAGCOORD.xy);
 		col = linear_to_srgb(col);
-		
+
 		if (static_noise_intensity > 0.0){
 			vec2 resolution = vec2(240.0, 180.0);
         	col.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;

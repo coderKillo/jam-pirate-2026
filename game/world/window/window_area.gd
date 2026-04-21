@@ -8,14 +8,16 @@ func _ready():
 
 
 func _on_body_entered(body: PhysicsBody2D):
-	body_to_world(body, false)
+	if body.name != "Player":
+		body_to_world(body, false)
 	var hurtbox = body.get_node_or_null("Hurtbox")
 	if hurtbox:
 		hutbox_to_world(hurtbox, false)
 
 
 func _on_body_exited(body: PhysicsBody2D):
-	body_to_world(body, true)
+	if body.name != "Player":
+		body_to_world(body, true)
 	var hurtbox = body.get_node_or_null("Hurtbox")
 	if hurtbox:
 		hutbox_to_world(hurtbox, true)

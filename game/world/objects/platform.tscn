@@ -77,7 +77,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xdot"]
-size = Vector2(32, 16)
+size = Vector2(32, 12)
 
 [node name="Platform" type="Path2D" groups=["platform"]]
 curve = SubResource("Curve2D_0gwkp")

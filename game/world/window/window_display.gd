@@ -9,6 +9,7 @@ const STATIC_NOISE_FACTOR = 1.0 / 20.0
 @export var enable := false
 
 @onready var virtual_rect: ColorRect = $VirtualRect
+@onready var window_area: WindowArea = $WindowArea
 
 var drag := false
 
@@ -25,7 +26,6 @@ func _unhandled_input(event):
 
 			var static_noise = (event.relative.length()) * STATIC_NOISE_FACTOR
 			var shader_material := virtual_rect.material as ShaderMaterial
-			print(static_noise)
 			shader_material.set_shader_parameter("static_noise_intensity", static_noise)
 
 
