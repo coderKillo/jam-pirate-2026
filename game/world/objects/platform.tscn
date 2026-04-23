@@ -185,7 +185,8 @@ autoplay = "default"
 frame_progress = 0.67481
 
 [node name="WorldChecker" type="StaticBody2D" parent="AnimatableBody2D"]
-collision_layer = 17
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/WorldChecker"]
 shape = SubResource("RectangleShape2D_4xdot")
