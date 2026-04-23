@@ -241,6 +241,8 @@ func _prevent_stuck():
 
 
 func _is_inside_region(contact_point: Vector2) -> bool:
+	if not is_instance_valid(_window_area_shape):
+		return false
 	return _region().has_point(contact_point)
 
 
@@ -278,7 +280,14 @@ func _on_damage_received(_body):
 
 
 func _on_player_step():
-	if get_collision_layer_value(Global.WORLD_LAYER):
-		audio.play_water_step_sound()
-	else:
+	if abs(velocity.x) <= 20.0:
+		return
+	if not _is_grounded:
+		return
+	if not control_enabled:
+		return
+
+	if _is_inside_region(global_position):
 		audio.play_ground_step_sound()
+	else:
+		audio.play_water_step_sound()

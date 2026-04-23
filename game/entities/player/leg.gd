@@ -39,16 +39,23 @@ func _physics_process(_delta):
 	var end = start + ray_direction * length
 	var query = PhysicsRayQueryParameters2D.create(start, end)
 	query.exclude = [player]
+	query.collision_mask = (
+		Global.VIRTUAL_LAYER if player._is_inside_region(end) else Global.WORLD_LAYER
+	)
 	var result = space_state.intersect_ray(query)
+	var new_feet_position = _feet_position
 	if result:
 		_ref_object = result.collider
-		_feet_position = result.position - _ref_object.global_position
 		_on_ground = true
-		Events.player_step.emit()
+		new_feet_position = result.position - _ref_object.global_position
 	else:
 		_ref_object = null
-		_feet_position = end
 		_on_ground = false
+		new_feet_position = end
+
+	if new_feet_position != _feet_position:
+		_feet_position = new_feet_position
+		Events.player_step.emit()
 
 
 func _process(_delta):
