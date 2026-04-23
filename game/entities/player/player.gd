@@ -42,6 +42,7 @@ func _physics_process(delta):
 		return
 
 	_check_ground()
+	_handle_coyote_time()
 
 	if not _is_grounded:
 		velocity.y += gravity * delta
@@ -185,7 +186,7 @@ func _check_ground():
 
 
 func _handle_coyote_time():
-	if not _is_grounded and _coyote_timer >= 0.0:
+	if not _is_grounded and _coyote_timer > 0.0:
 		_is_grounded = true
 		_coyote_timer -= get_physics_process_delta_time()
 
