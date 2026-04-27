@@ -75,50 +75,50 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VirtualRect:visible")
+tracks/2/path = NodePath("VirtualRect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("VirtualRect:modulate")
+tracks/3/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("WindowBG:position")
+tracks/4/path = NodePath("VirtualRect:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-2, -24)]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
+tracks/5/path = NodePath("WindowBG:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(-2, -24)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -163,50 +163,50 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("VirtualRect:visible")
+tracks/2/path = NodePath("VirtualRect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("VirtualRect:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(1.4, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("WindowBG:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.1, 0.166667, 0.933333, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-16, -104), Vector2(-2, -104), Vector2(-2, -104), Vector2(-2, -24)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VirtualRect:material:shader_parameter/static_noise_intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(1.39906, 1.59875, 1.89624),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [1.0, 1.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VirtualRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WindowBG:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.166667, 0.933333, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-16, -104), Vector2(-2, -104), Vector2(-2, -104), Vector2(-2, -24)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -278,9 +278,8 @@ bounding_box = Rect2(0, 0, 1280, 720)
 virtual_camera = NodePath("../../VirtualViewPort/VirtualCamera")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="WindowCanvesLayer/WindowDisplay"]
-visible = false
 position = Vector2(-482, -135)
-color = Color(1.3, 1.1, 1, 1)
+color = Color(1.2, 1.1, 1.04, 1)
 
 [node name="WindowBG" type="Sprite2D" parent="WindowCanvesLayer/WindowDisplay"]
 position = Vector2(-2, -24)
@@ -321,6 +320,7 @@ libraries = {
 }
 
 [node name="VirtualViewPort" type="SubViewport" parent="."]
+use_hdr_2d = true
 size = Vector2i(240, 180)
 
 [node name="BackgroundVirtual" parent="VirtualViewPort" instance=ExtResource("5_bicih")]

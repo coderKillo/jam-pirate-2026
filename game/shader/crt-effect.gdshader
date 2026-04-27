@@ -190,5 +190,8 @@ void fragment(){
 	if(vignette_amount > 0.0)clr *= vignette(pos);
 
 	COLOR.rgb = border(pos) >= 1.0 ? clr : bg_color.rgb;
+	if (COLOR.r >= 0.99) {
+		COLOR.r += 10.0;
+	}
 	COLOR.a = bg_color.a;
 }

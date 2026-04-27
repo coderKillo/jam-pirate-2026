@@ -254,6 +254,7 @@ void fragment() {
 			vec2 resolution = vec2(240.0, 180.0);
         	col.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
     	}
+
 		COLOR.rgb = col;
 	}
 }

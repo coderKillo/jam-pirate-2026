@@ -21,7 +21,8 @@ func set_player(player: Player):
 	add_child(_head)
 
 	for leg in _player.body.legs:
-		var leg_copy = leg.line.duplicate()
+		var leg_copy := leg.line.duplicate() as Line2D
+		leg_copy.modulate = leg.modulate
 		_legs.append(leg_copy)
 		add_child(leg_copy)
 
