@@ -1,24 +1,36 @@
-[gd_scene load_steps=7 format=4 uid="uid://cc2xiop7xk4ct"]
+[gd_scene load_steps=9 format=4 uid="uid://cc2xiop7xk4ct"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_c86s7"]
 [ext_resource type="Texture2D" uid="uid://jh8gg13jsn7v" path="res://game/levels/sketches/levels_0004_Ebene-3.png" id="2_c86s7"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="3_t4u7i"]
 
-[sub_resource type="Curve2D" id="Curve2D_0e6we"]
+[sub_resource type="Curve2D" id="Curve2D_t4u7i"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -375, 0, 0, 0, 0, 0, 375, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -325, 0, 0, 0, 0, 0, 325, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_t4u7i"]
+[sub_resource type="Curve2D" id="Curve2D_0e6we"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -150, 0, 0, 0, 0, 0, 150)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_mdncl"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, -100)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -150, 0, 0, 0, 0, 0, 150)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0tbwt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -150, 0, 0, 0, 0, 0, 150)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hw1ou"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, -150)
 }
 point_count = 2
 
@@ -33,33 +45,51 @@ texture = ExtResource("2_c86s7")
 tile_map_data = PackedByteArray("AADt/wEAAAACAAAAAADu/wEAAAACAAAAAADv/wEAAAACAAAAAADw/wEAAAACAAAAAADx/wEAAAACAAAAAAAOAAEAAAACAAAAAAAPAAEAAAACAAAAAAAQAAEAAAACAAAAAAARAAEAAAACAAAAAAASAAEAAAACAAAAAADt/wAAAQAAAAAAAADu/wAAAQAAAAAAAADv/wAAAQAAAAAAAADw/wAAAQAAAAAAAADx/wAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAA=")
 
 [node name="TV" parent="RealWorld" index="1"]
-position = Vector2(-267, -9)
+position = Vector2(-267, 5)
 
 [node name="Platform" parent="RealWorld" index="2" instance=ExtResource("3_t4u7i")]
-position = Vector2(14, 39)
-curve = SubResource("Curve2D_0e6we")
-length = 750.0
-speed = 50.0
+position = Vector2(60, 39)
+curve = SubResource("Curve2D_t4u7i")
+length = 650.0
+start_position = 0.0
+speed = 70.0
+move_in_real_world = false
 
 [node name="Platform2" parent="RealWorld" index="3" instance=ExtResource("3_t4u7i")]
-position = Vector2(-363, -122)
-curve = SubResource("Curve2D_t4u7i")
+position = Vector2(-167, -145)
+curve = SubResource("Curve2D_0e6we")
+length = 300.0
 direction = Vector2(0, 1)
+speed = 80.0
+in_virtual_world = false
 has_top_traps = true
 has_bottom_traps = true
 
-[node name="Platform3" parent="RealWorld" index="4" instance=ExtResource("3_t4u7i")]
-position = Vector2(-94, -121)
-curve = SubResource("Curve2D_t4u7i")
+[node name="Platform5" parent="RealWorld" index="4" instance=ExtResource("3_t4u7i")]
+position = Vector2(-369, -145)
+curve = SubResource("Curve2D_mdncl")
+length = 300.0
 direction = Vector2(0, 1)
+speed = 80.0
+has_top_traps = true
+has_bottom_traps = true
+
+[node name="Platform3" parent="RealWorld" index="5" instance=ExtResource("3_t4u7i")]
+position = Vector2(34, -144)
+curve = SubResource("Curve2D_0tbwt")
+length = 300.0
+direction = Vector2(0, 1)
+speed = 80.0
 has_top_traps = true
 has_bottom_traps = true
 move_in_virtual_world = false
 
-[node name="Platform4" parent="RealWorld" index="5" instance=ExtResource("3_t4u7i")]
-position = Vector2(130, -114)
-curve = SubResource("Curve2D_mdncl")
+[node name="Platform4" parent="RealWorld" index="6" instance=ExtResource("3_t4u7i")]
+position = Vector2(258, -137)
+curve = SubResource("Curve2D_hw1ou")
+length = 300.0
 direction = Vector2(0, -1)
+start_position = 0.15
 has_top_traps = true
 has_bottom_traps = true
 move_in_real_world = false

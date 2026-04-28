@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dtj3674kg1td3"]
+[gd_scene load_steps=13 format=4 uid="uid://dtj3674kg1td3"]
 
 [ext_resource type="Script" uid="uid://b7fpv65tmlaxw" path="res://game/levels/gym.gd" id="1_5064d"]
 [ext_resource type="TileSet" uid="uid://d220qv2d4bci6" path="res://game/levels/tileset.tres" id="2_t3fq8"]
@@ -6,6 +6,42 @@
 [ext_resource type="PackedScene" uid="uid://b2s7ptu8nju1" path="res://game/world/collection/couch.tscn" id="4_okyi0"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="4_t3fq8"]
 [ext_resource type="PackedScene" uid="uid://lubeg5j875jx" path="res://game/entities/player/player.tscn" id="5_myrj0"]
+
+[sub_resource type="Curve2D" id="Curve2D_t3fq8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0gwkp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_okyi0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_myrj0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jx1e0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_4hkau"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
 
 [node name="Gym" type="Node2D"]
 script = ExtResource("1_5064d")
@@ -25,28 +61,34 @@ position = Vector2(-467, 254)
 
 [node name="Platform" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(-175, 244)
+curve = SubResource("Curve2D_t3fq8")
 
 [node name="Platform2" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(41, 242)
+curve = SubResource("Curve2D_0gwkp")
 in_virtual_world = false
 has_top_traps = true
 
 [node name="Platform3" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(259, 244)
+curve = SubResource("Curve2D_okyi0")
 in_real_world = false
 has_top_traps = true
 
 [node name="Platform4" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(-175, 80)
+curve = SubResource("Curve2D_myrj0")
 in_virtual_world = false
 move_in_virtual_world = false
 
 [node name="Platform5" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(41, 78)
+curve = SubResource("Curve2D_jx1e0")
 move_in_real_world = false
 
 [node name="Platform6" parent="RealWorld" instance=ExtResource("4_t3fq8")]
 position = Vector2(259, 80)
+curve = SubResource("Curve2D_4hkau")
 in_real_world = false
 
 [node name="VirtualWorld" type="Node2D" parent="."]
