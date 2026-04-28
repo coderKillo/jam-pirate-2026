@@ -68,6 +68,11 @@ func _ready():
 	_virtual_sprite.get_node("TrapsBottom").visible = has_bottom_traps
 	_hitbox.get_node("CollisionBottom").disabled = not has_bottom_traps
 
+	WindowArea.body_to_world(_world_checker, true)
+
+	update_line()
+	update_follow()
+
 
 func _process(delta):
 	if Engine.is_editor_hint():
@@ -83,7 +88,7 @@ func _process(delta):
 	if new_progress >= length:
 		new_progress = (length - 0.1)
 		_path_follow_direction = -1
-	if new_progress <= 0.0:
+	elif new_progress <= 0.0:
 		new_progress = 0.0
 		_path_follow_direction = 1
 
@@ -102,15 +107,13 @@ func make_copy() -> Node2D:
 
 
 func update_line():
-	if not Engine.is_editor_hint():
-		return
-
 	var start = -(direction.normalized() * length / 2.0)
 	var end = direction.normalized() * length / 2.0
 
-	curve.clear_points()
-	curve.add_point(start)
-	curve.add_point(end)
+	var _curve := Curve2D.new()
+	_curve.add_point(start)
+	_curve.add_point(end)
+	curve = _curve
 
 	if is_instance_valid(_line):
 		_line.clear_points()
@@ -119,7 +122,5 @@ func update_line():
 
 
 func update_follow():
-	if not Engine.is_editor_hint():
-		return
 	if is_instance_valid(_path_follow):
 		_path_follow.progress = start_position * length

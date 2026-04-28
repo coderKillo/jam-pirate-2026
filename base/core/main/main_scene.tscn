@@ -44,7 +44,7 @@ shader_parameter/aspect = 0.75
 shader_parameter/static_noise_intensity = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ociif"]
-size = Vector2(240, 180)
+size = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_3p8nd"]
 length = 0.001
@@ -131,6 +131,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WindowArea/CollisionShape2D:shape:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_x0q8c"]
@@ -219,6 +231,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WindowArea/CollisionShape2D:shape:size")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.69, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(240, 180)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bicih"]

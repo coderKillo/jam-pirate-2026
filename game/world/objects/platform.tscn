@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brllshj6iqs72" path="res://assets/selfmade/tilemap.png" id="2_mm5bo"]
 [ext_resource type="Texture2D" uid="uid://k3bnqr57i13j" path="res://assets/selfmade/rain.png" id="3_mm5bo"]
 
-[sub_resource type="Curve2D" id="Curve2D_0gwkp"]
+[sub_resource type="Curve2D" id="Curve2D_mm5bo"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
 }
@@ -80,7 +80,7 @@ animations = [{
 size = Vector2(32, 12)
 
 [node name="Platform" type="Path2D" groups=["platform"]]
-curve = SubResource("Curve2D_0gwkp")
+curve = SubResource("Curve2D_mm5bo")
 script = ExtResource("1_4xdot")
 length = 200.0
 start_position = 0.5
@@ -89,7 +89,8 @@ has_top_traps = false
 has_bottom_traps = false
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2(-100, 0)
+progress = 100.0
+loop = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
