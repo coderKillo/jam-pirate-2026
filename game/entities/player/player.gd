@@ -71,13 +71,11 @@ func _physics_process(delta):
 		if direction != 0:
 			velocity.x = direction * _speed
 
-	var collision := move_and_collide(velocity * delta, true)
+	_prevent_stuck()
+
+	var collision := _custom_move_and_slide()
 	if collision:
 		_push_moving_object(collision, direction)
-		_jump_on_spring(collision)
-
-	_prevent_stuck()
-	_custom_move_and_slide()
 
 	_handle_platform()
 
@@ -91,10 +89,11 @@ func setup(window_area: WindowArea):
 	_last_window_position = _window_area_shape.global_position
 
 
-func _custom_move_and_slide():
+func _custom_move_and_slide() -> KinematicCollision2D:
 	const MAX_SLIDES = 4
 
 	var motion = velocity * get_physics_process_delta_time()
+	var result: KinematicCollision2D
 
 	for i in MAX_SLIDES:
 		set_collision_mask_value(Global.WORLD_LAYER, true)
@@ -112,7 +111,6 @@ func _custom_move_and_slide():
 		if virtual_result and WindowDisplay.is_inside_region(virtual_result.get_position()):
 			virtual_has_collision = true
 
-		var result: KinematicCollision2D
 		if real_has_collision and virtual_has_collision:
 			if real_result.get_travel().length() < virtual_result.get_travel().length():
 				result = real_result
@@ -130,6 +128,8 @@ func _custom_move_and_slide():
 		position += result.get_travel()
 		velocity = velocity.slide(result.get_normal())
 		motion = result.get_remainder()
+
+	return result
 
 
 func _check_ground():
@@ -189,6 +189,7 @@ func _check_ground():
 	if result:
 		_is_grounded = true
 		_ground_collider = result.collider
+		_jump_on_spring(result.collider)
 	else:
 		_is_grounded = false
 		_ground_collider = null
@@ -263,14 +264,12 @@ func _push_moving_object(collision: KinematicCollision2D, direction: float):
 	collider.apply_impulse(push_dir * push_force)
 
 
-func _jump_on_spring(collision: KinematicCollision2D):
-	var collider := collision.get_collider()
+func _jump_on_spring(collider: Object):
 	if not collider.is_in_group("spring"):
 		return
-	if collision.get_normal().y >= 0:
-		return
 	collider.play_animation()
-	velocity.y = -velocity.y * collider.power_multiply
+	velocity.y = -max(0, velocity.y) + jump_speed
+	_is_grounded = false
 
 
 func _on_damage_received(_body):
