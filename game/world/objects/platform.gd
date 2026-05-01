@@ -32,7 +32,6 @@ extends Path2D
 @onready var _real_spirte: Sprite2D = $AnimatableBody2D/RealSprite
 @onready var _body: AnimatableBody2D = $AnimatableBody2D
 @onready var _hitbox: StaticBody2D = $AnimatableBody2D/Hitbox
-@onready var _world_checker: StaticBody2D = $AnimatableBody2D/WorldChecker
 @onready var _line: Line2D = $Line2D
 
 var virtual_copy: Sprite2D
@@ -68,8 +67,6 @@ func _ready():
 	_virtual_sprite.get_node("TrapsBottom").visible = has_bottom_traps
 	_hitbox.get_node("CollisionBottom").disabled = not has_bottom_traps
 
-	WindowArea.body_to_world(_world_checker, true)
-
 	update_line()
 	update_follow()
 
@@ -78,9 +75,9 @@ func _process(delta):
 	if Engine.is_editor_hint():
 		return
 
-	if not move_in_real_world and _world_checker.get_collision_layer_value(Global.WORLD_LAYER):
+	if not move_in_real_world and not WindowDisplay.is_inside_region(global_position):
 		return
-	if not move_in_virtual_world and _world_checker.get_collision_layer_value(Global.VIRTUAL_LAYER):
+	if not move_in_virtual_world and WindowDisplay.is_inside_region(global_position):
 		return
 
 	var new_progress = _path_follow.progress + _path_follow_direction * speed * delta

@@ -38,11 +38,8 @@ func _ready():
 func _physics_process(delta):
 	if not control_enabled:
 		return
-	if not is_instance_valid(_window_area_shape):
+	if not WindowDisplay.region_valid():
 		return
-
-	_check_ground()
-	_handle_coyote_time()
 
 	if not _is_grounded:
 		velocity.y += gravity * delta
@@ -50,7 +47,10 @@ func _physics_process(delta):
 	else:
 		velocity.y = 0.0
 
-	if Input.is_action_just_pressed("jump") and _is_grounded:
+	_check_ground()
+	_handle_coyote_time()
+
+	if Input.is_action_just_pressed("jump") and (_is_grounded or _coyote_timer > 0.0):
 		audio.play_jump()
 		velocity.y = jump_speed
 		_is_grounded = false
@@ -106,10 +106,10 @@ func _custom_move_and_slide():
 		var virtual_result := move_and_collide(motion, true)
 
 		var real_has_collision = false
-		if real_result and not _is_inside_region(real_result.get_position()):
+		if real_result and not WindowDisplay.is_inside_region(real_result.get_position()):
 			real_has_collision = true
 		var virtual_has_collision = false
-		if virtual_result and _is_inside_region(virtual_result.get_position()):
+		if virtual_result and WindowDisplay.is_inside_region(virtual_result.get_position()):
 			virtual_has_collision = true
 
 		var result: KinematicCollision2D
@@ -137,8 +137,8 @@ func _check_ground():
 	var motion = velocity * get_physics_process_delta_time()
 
 	var checker_pos = global_position + Vector2.DOWN * (PLAYER_SIZE + motion.y)
-	var checker_inside_region = _is_inside_region(checker_pos)
-	var player_inside_region = _is_inside_region(global_position)
+	var checker_inside_region = WindowDisplay.is_inside_region(checker_pos)
+	var player_inside_region = WindowDisplay.is_inside_region(global_position)
 
 	var space_state := get_world_2d().direct_space_state
 
@@ -147,6 +147,7 @@ func _check_ground():
 		var query := PhysicsRayQueryParameters2D.new()
 		query.from = global_position
 		query.to = checker_pos
+		query.exclude = [get_rid()]
 		query.collision_mask = Global.VIRTUAL_LAYER if player_inside_region else Global.WORLD_LAYER
 
 		result = space_state.intersect_ray(query)
@@ -154,8 +155,16 @@ func _check_ground():
 		# split collision check in inside and outside
 		var outside_region_point = checker_pos if player_inside_region else global_position
 		var border_point = Vector2(
-			clamp(outside_region_point.x, _region().position.x, _region().end.x),
-			clamp(outside_region_point.y, _region().position.y, _region().end.y)
+			clamp(
+				outside_region_point.x,
+				WindowDisplay.region().position.x,
+				WindowDisplay.region().end.x
+			),
+			clamp(
+				outside_region_point.y,
+				WindowDisplay.region().position.y,
+				WindowDisplay.region().end.y
+			)
 		)
 
 		var query := PhysicsRayQueryParameters2D.new()
@@ -178,17 +187,18 @@ func _check_ground():
 				result = tresult[0]
 
 	if result:
-		_coyote_timer = coyote_time
 		_is_grounded = true
 		_ground_collider = result.collider
 	else:
 		_is_grounded = false
+		_ground_collider = null
 
 
 func _handle_coyote_time():
 	if not _is_grounded and _coyote_timer > 0.0:
-		_is_grounded = true
 		_coyote_timer -= get_physics_process_delta_time()
+	if _is_grounded:
+		_coyote_timer = coyote_time
 
 
 func _handle_platform():
@@ -223,8 +233,8 @@ func _prevent_stuck():
 
 	var checker_pos = global_position + movement + offset
 
-	var player_inside_region = _is_inside_region(global_position)
-	var checker_inside_region = _is_inside_region(checker_pos)
+	var player_inside_region = WindowDisplay.is_inside_region(global_position)
+	var checker_inside_region = WindowDisplay.is_inside_region(checker_pos)
 
 	if player_inside_region == checker_inside_region:
 		# no transition between region
@@ -239,19 +249,6 @@ func _prevent_stuck():
 
 	if result:
 		position -= movement
-
-
-func _is_inside_region(contact_point: Vector2) -> bool:
-	if not is_instance_valid(_window_area_shape):
-		return false
-	return _region().has_point(contact_point)
-
-
-func _region() -> Rect2:
-	var size: Vector2 = (_window_area_shape.shape as RectangleShape2D).size
-	var center: Vector2 = _window_area_shape.global_position
-	var region := Rect2(center - size / 2.0, size)
-	return region
 
 
 func _push_moving_object(collision: KinematicCollision2D, direction: float):
@@ -288,7 +285,7 @@ func _on_player_step():
 	if not control_enabled:
 		return
 
-	if _is_inside_region(global_position):
+	if WindowDisplay.is_inside_region(global_position):
 		audio.play_ground_step_sound()
 	else:
 		audio.play_water_step_sound()

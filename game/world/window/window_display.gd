@@ -13,6 +13,12 @@ const STATIC_NOISE_FACTOR = 1.0 / 20.0
 
 var drag := false
 
+static var _window_area_shape: CollisionShape2D
+
+
+func _ready():
+	_window_area_shape = $WindowArea/CollisionShape2D
+
 
 func _unhandled_input(event):
 	if enable:
@@ -31,3 +37,28 @@ func _unhandled_input(event):
 
 func _process(_delta):
 	virtual_camera.global_position = global_position
+
+
+static func is_inside_region(contact_point: Vector2) -> bool:
+	if not region_valid():
+		return false
+	return region().has_point(contact_point)
+
+
+static func region() -> Rect2:
+	if not region_valid():
+		return Rect2(Vector2.ZERO, Vector2.ZERO)
+	var size: Vector2 = (_window_area_shape.shape as RectangleShape2D).size
+	var center: Vector2 = _window_area_shape.global_position
+	var rect := Rect2(center - size / 2.0, size)
+	return rect
+
+
+static func region_valid() -> bool:
+	return is_instance_valid(_window_area_shape)
+
+
+static func area_position() -> Vector2:
+	if not region_valid():
+		return Vector2.ZERO
+	return _window_area_shape.global_position
