@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bxnfignt4xwg8" path="res://assets/selfmade/spring.png" id="1_31i82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1fwbs"]
-radius = 16.0
-height = 38.0
+radius = 29.0
+height = 66.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2f27a"]
 atlas = ExtResource("1_31i82")
@@ -72,6 +72,7 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_1fwbs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y1ylc")
 animation = &"idle"
 autoplay = "idle"
