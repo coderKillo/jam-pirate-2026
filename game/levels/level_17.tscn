@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=4 uid="uid://dee6tmuw8l64d"]
+[gd_scene load_steps=6 format=4 uid="uid://dee6tmuw8l64d"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_hiesm"]
 [ext_resource type="Texture2D" uid="uid://c3nd6i2s0c12u" path="res://game/levels/sketches/levels_0001_Ebene-6.png" id="2_lrgyj"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="3_hiesm"]
 
+[sub_resource type="Curve2D" id="Curve2D_hiesm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 450, 0, 0, 0, 0, 0, -450, 0)
+}
+point_count = 2
+
 [sub_resource type="Curve2D" id="Curve2D_fuuno"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -450, 0, 0, 0, 0, 0, 450, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 450, 0, 0, 0, 0, 0, -450, 0)
 }
 point_count = 2
 
@@ -25,16 +31,20 @@ position = Vector2(-466, -152)
 
 [node name="Platform" parent="RealWorld" index="2" instance=ExtResource("3_hiesm")]
 position = Vector2(113, 53)
-curve = SubResource("Curve2D_fuuno")
+curve = SubResource("Curve2D_hiesm")
 length = 900.0
-speed = 30.0
+direction = Vector2(-1, 0)
+start_position = 0.6
+speed = 80.0
 in_real_world = false
 
 [node name="Platform2" parent="RealWorld" index="3" instance=ExtResource("3_hiesm")]
 position = Vector2(117, 137)
 curve = SubResource("Curve2D_fuuno")
 length = 900.0
-speed = 30.0
+direction = Vector2(-1, 0)
+start_position = 0.6
+speed = 80.0
 in_virtual_world = false
 
 [node name="TileMapLayer" parent="VirtualWorld" index="0"]

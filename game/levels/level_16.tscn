@@ -1,28 +1,28 @@
-[gd_scene load_steps=10 format=4 uid="uid://m06ii5g2lijq"]
+[gd_scene load_steps=12 format=4 uid="uid://m06ii5g2lijq"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_eth3c"]
 [ext_resource type="Texture2D" uid="uid://di5wits3hxo08" path="res://game/levels/sketches/levels_0002_Ebene-5.png" id="2_eth3c"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="3_3bnrq"]
 
-[sub_resource type="Curve2D" id="Curve2D_saeao"]
+[sub_resource type="Curve2D" id="Curve2D_3bnrq"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -150, 0, 0, 0, 0, 0, 150, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_60s73"]
+[sub_resource type="Curve2D" id="Curve2D_saeao"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -50, 0, 0, 0, 0, 0, 50, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_3bnrq"]
+[sub_resource type="Curve2D" id="Curve2D_anqww"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 150, 0, 0, 0, 0, 0, -150, 0)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_anqww"]
+[sub_resource type="Curve2D" id="Curve2D_s3bl5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
 }
@@ -34,7 +34,19 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_s3bl5"]
+[sub_resource type="Curve2D" id="Curve2D_60s73"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 100, 0, 0, 0, 0, 0, -100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_afacd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_o0dr5"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
 }
@@ -55,52 +67,62 @@ position = Vector2(-467, 202)
 
 [node name="Platform" parent="RealWorld" index="2" instance=ExtResource("3_3bnrq")]
 position = Vector2(-402, -118)
-curve = SubResource("Curve2D_saeao")
+curve = SubResource("Curve2D_3bnrq")
 length = 300.0
+speed = 120.0
 in_virtual_world = false
 has_top_traps = true
 
 [node name="Platform6" parent="RealWorld" index="3" instance=ExtResource("3_3bnrq")]
 position = Vector2(527, -84)
-curve = SubResource("Curve2D_60s73")
+curve = SubResource("Curve2D_saeao")
 length = 100.0
+speed = 150.0
 in_virtual_world = false
 has_top_traps = true
 
 [node name="Platform2" parent="RealWorld" index="4" instance=ExtResource("3_3bnrq")]
 position = Vector2(-472, 59)
-curve = SubResource("Curve2D_3bnrq")
+curve = SubResource("Curve2D_anqww")
 length = 300.0
 direction = Vector2(-1, 0)
+speed = 120.0
 in_virtual_world = false
 has_top_traps = true
 
 [node name="Platform3" parent="RealWorld" index="5" instance=ExtResource("3_3bnrq")]
-position = Vector2(-113, 160)
-curve = SubResource("Curve2D_anqww")
+position = Vector2(-173, 160)
+curve = SubResource("Curve2D_s3bl5")
+speed = 80.0
 in_real_world = false
 
 [node name="Platform5" parent="RealWorld" index="6" instance=ExtResource("3_3bnrq")]
-position = Vector2(39, 57)
+position = Vector2(134, 93)
 curve = SubResource("Curve2D_ajrse")
 direction = Vector2(-1, 0)
+speed = 80.0
 in_real_world = false
 
 [node name="Platform8" parent="RealWorld" index="7" instance=ExtResource("3_3bnrq")]
-position = Vector2(90, -123)
-curve = SubResource("Curve2D_ajrse")
+position = Vector2(149, -84)
+curve = SubResource("Curve2D_60s73")
 direction = Vector2(-1, 0)
+speed = 80.0
 in_real_world = false
 
 [node name="Platform4" parent="RealWorld" index="8" instance=ExtResource("3_3bnrq")]
-position = Vector2(-46, -51)
-curve = SubResource("Curve2D_s3bl5")
+position = Vector2(-159, -2)
+curve = SubResource("Curve2D_afacd")
+speed = 80.0
 in_real_world = false
 
 [node name="Platform7" parent="RealWorld" index="9" instance=ExtResource("3_3bnrq")]
-position = Vector2(137, -224)
-curve = SubResource("Curve2D_s3bl5")
+position = Vector2(220, -182)
+curve = SubResource("Curve2D_o0dr5")
+speed = 80.0
 in_real_world = false
+move_in_real_world = false
+move_in_virtual_world = false
 
 [node name="TileMapLayer" parent="VirtualWorld" index="0"]
 tile_map_data = PackedByteArray("AAD1/wwAAAAAAAIAAgD1/wsAAAABAAIAAwD1/woAAAABAAIAAwD1/wkAAAABAAIAAwD1/wgAAAABAAIAAwD1/wcAAAAAAAIAAQD0/wwAAAABAAIAAQD0/wsAAAABAAMAAAD0/woAAAABAAMAAAD0/wkAAAABAAMAAAD0/wgAAAABAAMAAAD0/wcAAAABAAIAAADz/wwAAAABAAIAAQDz/wsAAAABAAMAAADz/woAAAABAAMAAADz/wkAAAABAAMAAADz/wgAAAABAAMAAADz/wcAAAABAAIAAADy/wwAAAABAAIAAQDy/wsAAAABAAMAAADy/woAAAABAAMAAADy/wkAAAABAAMAAADy/wgAAAABAAMAAADy/wcAAAABAAIAAADx/wwAAAABAAIAAQDx/wsAAAABAAMAAADx/woAAAABAAMAAADx/wkAAAABAAMAAADx/wgAAAABAAMAAADx/wcAAAABAAIAAADw/wwAAAABAAIAAQDw/wsAAAABAAMAAADw/woAAAABAAMAAADw/wkAAAABAAMAAADw/wgAAAABAAMAAADw/wcAAAABAAIAAADv/wwAAAABAAIAAQDv/wsAAAABAAMAAADv/woAAAABAAMAAADv/wkAAAABAAMAAADv/wgAAAABAAMAAADv/wcAAAABAAIAAADu/wwAAAABAAIAAQDu/wsAAAABAAMAAADu/woAAAABAAMAAADu/wkAAAABAAMAAADu/wgAAAABAAMAAADu/wcAAAABAAIAAADt/wwAAAABAAIAAQDt/wsAAAABAAMAAADt/woAAAABAAMAAADt/wkAAAABAAMAAADt/wgAAAABAAMAAADt/wcAAAABAAIAAADs/wwAAAABAAIAAQDs/wsAAAABAAMAAADs/woAAAABAAMAAADs/wkAAAABAAMAAADs/wgAAAABAAMAAADs/wcAAAABAAIAAADr/wwAAAABAAIAAQDr/wsAAAABAAMAAADr/woAAAABAAMAAADr/wkAAAABAAMAAADr/wgAAAABAAMAAADr/wcAAAABAAIAAADq/wwAAAAAAAIAAwDq/wsAAAABAAIAAgDq/woAAAABAAIAAgDq/wkAAAABAAIAAgDq/wgAAAABAAIAAgDq/wcAAAAAAAIAAAAMAAsAAAAAAAMAAQAMAAoAAAABAAMAAAAMAAkAAAABAAMAAAAMAAgAAAAAAAMAAgAMAAcAAAABAAIAAwAMAAYAAAABAAIAAwAMAAUAAAABAAIAAwAMAAQAAAABAAIAAwAMAAMAAAABAAIAAwAMAAIAAAABAAIAAwAMAAEAAAABAAIAAwAMAAAAAAABAAIAAwAMAP//AAABAAIAAwAMAP7/AAABAAIAAwAMAP3/AAABAAIAAwAMAPz/AAABAAIAAwAMAPv/AAABAAIAAwAMAPr/AAABAAIAAwAMAPn/AAABAAIAAwAMAPj/AAAAAAIAAQALAAsAAAABAAIAAQALAAoAAAABAAMAAAALAAkAAAABAAMAAAALAAgAAAABAAMAAAALAAcAAAABAAMAAAALAAYAAAABAAMAAAALAAUAAAABAAMAAAALAAQAAAABAAMAAAALAAMAAAABAAMAAAALAAIAAAABAAMAAAALAAEAAAABAAMAAAALAAAAAAABAAMAAAALAP//AAABAAMAAAALAP7/AAABAAMAAAALAP3/AAABAAMAAAALAPz/AAABAAMAAAALAPv/AAABAAMAAAALAPr/AAABAAMAAAALAPn/AAABAAMAAAALAPj/AAABAAIAAAAKAAsAAAABAAIAAQAKAAoAAAABAAMAAAAKAAkAAAABAAMAAAAKAAgAAAABAAMAAAAKAAcAAAABAAMAAAAKAAYAAAABAAMAAAAKAAUAAAABAAMAAAAKAAQAAAABAAMAAAAKAAMAAAABAAMAAAAKAAIAAAABAAMAAAAKAAEAAAABAAMAAAAKAAAAAAABAAMAAAAKAP//AAABAAMAAAAKAP7/AAABAAMAAAAKAP3/AAABAAMAAAAKAPz/AAABAAMAAAAKAPv/AAABAAMAAAAKAPr/AAABAAMAAAAKAPn/AAABAAMAAAAKAPj/AAABAAIAAAAJAAsAAAAAAAIAAwAJAAoAAAABAAIAAgAJAAkAAAABAAIAAgAJAAgAAAABAAIAAgAJAAcAAAABAAIAAgAJAAYAAAABAAIAAgAJAAUAAAABAAIAAgAJAAQAAAABAAIAAgAJAAMAAAABAAIAAgAJAAIAAAABAAIAAgAJAAEAAAABAAIAAgAJAAAAAAABAAIAAgAJAP//AAABAAIAAgAJAP7/AAABAAIAAgAJAP3/AAABAAIAAgAJAPz/AAABAAIAAgAJAPv/AAABAAIAAgAJAPr/AAABAAIAAgAJAPn/AAABAAIAAgAJAPj/AAAAAAIAAAAVAAwAAAAAAAIAAgAVAAsAAAABAAIAAwAVAAoAAAABAAIAAwAVAAkAAAABAAIAAwAVAAgAAAAAAAIAAQAUAAwAAAABAAIAAQAUAAsAAAABAAMAAAAUAAoAAAABAAMAAAAUAAkAAAABAAMAAAAUAAgAAAABAAIAAAATAAwAAAABAAIAAQATAAsAAAABAAMAAAATAAoAAAABAAMAAAATAAkAAAABAAMAAAATAAgAAAABAAIAAAASAAwAAAABAAIAAQASAAsAAAABAAMAAAASAAoAAAABAAMAAAASAAkAAAABAAMAAAASAAgAAAABAAIAAAARAAwAAAABAAIAAQARAAsAAAABAAMAAAARAAoAAAABAAMAAAARAAkAAAABAAMAAAARAAgAAAABAAIAAAAQAAwAAAABAAIAAQAQAAsAAAABAAMAAAAQAAoAAAABAAMAAAAQAAkAAAABAAMAAAAQAAgAAAABAAIAAAAPAAwAAAABAAIAAQAPAAsAAAABAAMAAAAPAAoAAAABAAMAAAAPAAkAAAABAAMAAAAPAAgAAAABAAIAAAAOAAwAAAABAAIAAQAOAAsAAAABAAMAAAAOAAoAAAABAAMAAAAOAAkAAAABAAMAAAAOAAgAAAABAAIAAAANAAwAAAABAAIAAQANAAsAAAABAAMAAAANAAoAAAABAAMAAAANAAkAAAABAAMAAAANAAgAAAABAAIAAAAMAAwAAAAAAAIAAwA=")

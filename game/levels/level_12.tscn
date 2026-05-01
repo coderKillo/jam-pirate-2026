@@ -1,10 +1,22 @@
-[gd_scene load_steps=5 format=4 uid="uid://ggxerspskspp"]
+[gd_scene load_steps=7 format=4 uid="uid://ggxerspskspp"]
 
 [ext_resource type="PackedScene" uid="uid://7eh1kmaickso" path="res://game/levels/level_template.tscn" id="1_lbbbg"]
 [ext_resource type="Texture2D" uid="uid://cifjob7o744hd" path="res://game/levels/sketches/levels_0006_Ebene-1.png" id="2_lbbbg"]
 [ext_resource type="PackedScene" uid="uid://cffhqomdfcoir" path="res://game/world/objects/platform.tscn" id="3_jx66h"]
 
 [sub_resource type="Curve2D" id="Curve2D_jx66h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jthda"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 100, 0, 0, 0, 0, 0, -100, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_72mgi"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -100, 0, 0, 0, 0, 0, 100, 0)
 }
@@ -30,13 +42,14 @@ speed = 50.0
 
 [node name="Platform2" parent="RealWorld" index="3" instance=ExtResource("3_jx66h")]
 position = Vector2(36, 48)
-curve = SubResource("Curve2D_jx66h")
+curve = SubResource("Curve2D_jthda")
+direction = Vector2(-1, 0)
 speed = 50.0
 in_real_world = false
 
 [node name="Platform3" parent="RealWorld" index="4" instance=ExtResource("3_jx66h")]
 position = Vector2(330, 48)
-curve = SubResource("Curve2D_jx66h")
+curve = SubResource("Curve2D_72mgi")
 speed = 50.0
 in_virtual_world = false
 

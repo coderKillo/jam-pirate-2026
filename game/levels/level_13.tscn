@@ -6,13 +6,13 @@
 
 [sub_resource type="Curve2D" id="Curve2D_poqqp"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -250, 0, 0, 0, 0, 0, 250, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 250, 0, 0, 0, 0, 0, -250, 0)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_4efn3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, -125)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -125, 0, 0, 0, 0, 0, 125)
 }
 point_count = 2
 
@@ -33,6 +33,7 @@ position = Vector2(-21, 47)
 position = Vector2(-42, 81)
 curve = SubResource("Curve2D_poqqp")
 length = 500.0
+direction = Vector2(-1, 0)
 speed = 80.0
 in_virtual_world = false
 
@@ -40,7 +41,7 @@ in_virtual_world = false
 position = Vector2(242, -80)
 curve = SubResource("Curve2D_4efn3")
 length = 250.0
-direction = Vector2(0, -1)
+direction = Vector2(0, 1)
 start_position = 0.838
 speed = 40.0
 move_in_virtual_world = false

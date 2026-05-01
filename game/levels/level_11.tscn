@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_n6fd1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -225, 0, 0, 0, 0, 0, 225, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -450, 0, 0, 0, 0, 0, 450, 0)
 }
 point_count = 2
 
@@ -24,9 +24,10 @@ tile_map_data = PackedByteArray("AADu//7/AAACAAAAAADv//7/AAACAAAAAADw//7/AAACAAA
 position = Vector2(467, -56)
 
 [node name="Platform" parent="RealWorld" index="2" instance=ExtResource("3_n6fd1")]
-position = Vector2(49, 30)
+position = Vector2(71, 27)
 curve = SubResource("Curve2D_n6fd1")
-length = 450.0
+length = 900.0
+start_position = 0.0
 speed = 90.0
 
 [node name="TileMapLayer" parent="VirtualWorld" index="0"]
