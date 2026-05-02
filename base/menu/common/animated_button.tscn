@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cub5ixau0orgh"]
+[gd_scene load_steps=5 format=3 uid="uid://cub5ixau0orgh"]
 
 [ext_resource type="Theme" uid="uid://4r6b2cnujbph" path="res://assets/gui_assets/waste_no_space.theme" id="1_h2tl6"]
 [ext_resource type="Script" uid="uid://ci5pk7ebiqg86" path="res://base/menu/common/animated_button.gd" id="1_nwgvu"]
+[ext_resource type="AudioStream" uid="uid://cg5gtn4fcglr1" path="res://assets/sound_effects/kenney_interfaceSounds/Audio/switch_002.ogg" id="3_1yqqt"]
+[ext_resource type="AudioStream" uid="uid://dk6k03mjwb457" path="res://assets/sound_effects/kenney_interfaceSounds/Audio/bong_001.ogg" id="4_i5e6m"]
 
 [node name="AnimatedButton" type="Button"]
 self_modulate = Color(1, 1, 1, 0)
@@ -40,3 +42,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 text = "<>"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1yqqt")
+bus = &"SFX"
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_i5e6m")
+volume_db = 3.0
+pitch_scale = 1.2
+bus = &"SFX"

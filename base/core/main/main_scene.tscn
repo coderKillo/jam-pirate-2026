@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b6pacd4qux0r0"]
+[gd_scene load_steps=29 format=3 uid="uid://b6pacd4qux0r0"]
 
 [ext_resource type="Script" uid="uid://xwkwmj6gqkg7" path="res://base/core/main/main.gd" id="1_awp0h"]
 [ext_resource type="PackedScene" uid="uid://dk47cnmrq5x83" path="res://game/world/background/background_real.tscn" id="2_3p8nd"]
@@ -9,12 +9,13 @@
 [ext_resource type="Shader" uid="uid://d2l6336ho1gxl" path="res://game/shader/virtual_shader.gdshader" id="6_oh5ki"]
 [ext_resource type="Script" uid="uid://bsbyrdhdjck38" path="res://game/world/window/window_area.gd" id="7_6icyu"]
 [ext_resource type="Script" uid="uid://bi8bas01ign" path="res://base/core/main/virtual_player.gd" id="7_ociif"]
+[ext_resource type="AudioStream" uid="uid://djs2omva5shc" path="res://assets/sound_effects/camera-focus-1.wav" id="8_4jeu6"]
 [ext_resource type="AudioStream" uid="uid://blhtgiq3hxp3a" path="res://assets/music/Loop.wav" id="12_bicih"]
-[ext_resource type="AudioStream" uid="uid://cxrp3377dg07" path="res://assets/sound_effects/newthingget.ogg" id="14_0h0lk"]
+[ext_resource type="AudioStream" uid="uid://h0khnoqpjgie" path="res://assets/sound_effects/Komiku_-_11_-_Trop_la_win.mp3" id="12_oh5ki"]
+[ext_resource type="AudioStream" uid="uid://cp4kxt0dfgpky" path="res://assets/sound_effects/death.wav" id="13_oh5ki"]
 [ext_resource type="AudioStream" uid="uid://bu23c15kywhlc" path="res://assets/sound_effects/rain_on_window_loop.wav" id="14_ax4ej"]
-[ext_resource type="AudioStream" uid="uid://dexxms5nb722t" path="res://assets/sound_effects/losetrumpet.wav" id="14_cyqf4"]
+[ext_resource type="AudioStream" uid="uid://c46jlkmydaast" path="res://assets/sound_effects/kenney_interfaceSounds/Audio/confirmation_001.ogg" id="15_4jeu6"]
 [ext_resource type="PackedScene" uid="uid://cu3qgpflgrsi2" path="res://game/vfx/screen_effects.tscn" id="15_ax4ej"]
-[ext_resource type="AudioStream" uid="uid://bywlu2yycoir7" path="res://assets/sound_effects/pop1.ogg" id="16_0h0lk"]
 [ext_resource type="Shader" uid="uid://hb3ougyfuieb" path="res://game/shader/wave.gdshader" id="16_oh5ki"]
 [ext_resource type="Script" uid="uid://cwnxpycjhdsmv" path="res://game/vfx/wave_effect.gd" id="17_oh5ki"]
 
@@ -244,6 +245,26 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(240, 180)]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.566667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bicih"]
 _data = {
@@ -343,6 +364,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_bicih")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WindowCanvesLayer/WindowDisplay"]
+stream = ExtResource("8_4jeu6")
+pitch_scale = 0.7
+
 [node name="VirtualViewPort" type="SubViewport" parent="."]
 use_hdr_2d = true
 size = Vector2i(240, 180)
@@ -385,21 +410,21 @@ bus = &"SFX"
 
 [node name="LevelWonSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("14_0h0lk")
+stream = ExtResource("12_oh5ki")
 volume_db = -5.0
 pitch_scale = 0.9
 bus = &"SFX"
 
 [node name="LevelLosSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("14_cyqf4")
+stream = ExtResource("13_oh5ki")
 volume_db = -3.0
 bus = &"SFX"
 
 [node name="TvCollectedSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_0h0lk")
-volume_db = 10.0
-pitch_scale = 0.6
+stream = ExtResource("15_4jeu6")
+volume_db = 3.0
+pitch_scale = 0.9
 bus = &"SFX"
 
 [node name="ScreenEffects" parent="." instance=ExtResource("15_ax4ej")]

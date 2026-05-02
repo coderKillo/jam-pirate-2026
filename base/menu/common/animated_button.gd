@@ -14,6 +14,9 @@ extends Button
 @export_subgroup("time")
 @export var time := 1.2
 
+@onready var click_sound := $Click as AudioStreamPlayer
+@onready var hover_sound := $Hover as AudioStreamPlayer
+
 
 func _ready():
 	$Content/Button.text = text

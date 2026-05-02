@@ -9,7 +9,7 @@ func _ready():
 	Events.level_won.connect(_on_level_won)
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_left"):
 		_on_body_connect(Player.new())
 

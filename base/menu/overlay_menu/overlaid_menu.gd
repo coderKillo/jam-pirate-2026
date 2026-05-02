@@ -26,4 +26,4 @@ func _enter_tree() -> void:
 	_initial_pause_state = _scene_tree.paused
 	if Engine.is_editor_hint():
 		return
-	_scene_tree.paused = pauses_game or _initial_pause_state
+	_scene_tree.set_deferred("paused", pauses_game or _initial_pause_state)

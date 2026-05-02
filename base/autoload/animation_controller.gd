@@ -12,6 +12,7 @@ func register_button(button: AnimatedButton) -> void:
 
 func _on_mouse_entered(node: AnimatedButton) -> void:
 	_do_animation(node, "scale", node.scale_normal, node.scale_up, node.time)
+	node.hover_sound.play()
 
 
 func _on_mouse_exited(node: AnimatedButton) -> void:
@@ -21,6 +22,7 @@ func _on_mouse_exited(node: AnimatedButton) -> void:
 func _on_button_down(node: AnimatedButton) -> void:
 	_do_animation(node, "scale", node.scale_normal, node.scale_pressed, node.time)
 	_do_animation(node, "rotation", node.rotation_normal, node.rotation_pressed, node.time)
+	node.click_sound.play()
 
 
 func _on_button_up(node: AnimatedButton) -> void:
@@ -33,7 +35,7 @@ func _do_animation(
 ) -> void:
 	if not is_inside_tree():
 		return
-	var tween = get_tree().create_tween()
+	var tween = object.create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.set_parallel(true)
 	(
